@@ -31,10 +31,18 @@ jobs:
       #     echo "experiment_prefix=$experiment_prefix" >> $GITHUB_ENV
       #     echo "replace_last_flag=$replace_last_flag" >> $GITHUB_ENV
 
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
+      # - name: Checkout repository
+      #   uses: actions/checkout@v3
+      #   with:
+      #     ref: ${{ github.head_ref }}
+
+       - name: Checkout
+         uses: actions/checkout@v2
+
+       - name: Checkout Pull Request
+         run: hub pr checkout ${{ github.event.issue.number }}
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print current branch
         run: echo "$(git branch)"
