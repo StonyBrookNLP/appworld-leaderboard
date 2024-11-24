@@ -3,6 +3,8 @@ name: New leaderboard entry
 on:
   issue_comment:
     types: [created]
+    branches:
+      - main
 
 jobs:
   add-new-entry:
@@ -31,6 +33,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
 
       - uses: astral-sh/setup-uv@v3
         with:
@@ -50,6 +54,7 @@ jobs:
       - name: Verify PR file changes
         run: |
             echo "Checking PR for exactly two new files..."
+            git fetch origin main
             experiment_prefix="${{ env.experiment_prefix }}"
             expected_files=("${experiment_prefix}_test_normal" "${experiment_prefix}_test_challenge")
             new_files=$(git diff --diff-filter=A --name-only origin/main...HEAD)
@@ -102,4 +107,3 @@ jobs:
               issue_number: issue_number,
               body: commentBody,
             });
-
