@@ -1,0 +1,800 @@
+[
+    {
+        "id": "77f25849-862250c4",
+        "method": {
+            "name": "PlanExec",
+            "tooltip": "Plan & Execute"
+        },
+        "llm": {
+            "name": "LLaMA3-70B",
+            "tooltip": "meta-llama/Llama-3-70b-chat-hf"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 8.9,
+                "scenario_goal_completion": 1.8,
+                "interactions": 33.72
+            },
+            "level 1": {
+                "task_goal_completion": 19.3,
+                "scenario_goal_completion": 5.3,
+                "interactions": 33.72
+            },
+            "level 2": {
+                "task_goal_completion": 8.3,
+                "scenario_goal_completion": 0.0,
+                "interactions": 33.72
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 33.72
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 2.4,
+                "scenario_goal_completion": 0.7,
+                "interactions": 63.09
+            },
+            "level 1": {
+                "task_goal_completion": 11.1,
+                "scenario_goal_completion": 4.2,
+                "interactions": 63.09
+            },
+            "level 2": {
+                "task_goal_completion": 0.7,
+                "scenario_goal_completion": 0.0,
+                "interactions": 63.09
+            },
+            "level 3": {
+                "task_goal_completion": 0.5,
+                "scenario_goal_completion": 0.0,
+                "interactions": 63.09
+            }
+        }
+    },
+    {
+        "id": "4077db41-07bc5204",
+        "method": {
+            "name": "ReAct",
+            "tooltip": "Reason + Act"
+        },
+        "llm": {
+            "name": "LLaMA3-70B",
+            "tooltip": "meta-llama/Llama-3-70b-chat-hf"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 20.8,
+                "scenario_goal_completion": 8.9,
+                "interactions": 24.43
+            },
+            "level 1": {
+                "task_goal_completion": 42.1,
+                "scenario_goal_completion": 15.8,
+                "interactions": 24.43
+            },
+            "level 2": {
+                "task_goal_completion": 12.5,
+                "scenario_goal_completion": 6.2,
+                "interactions": 24.43
+            },
+            "level 3": {
+                "task_goal_completion": 7.9,
+                "scenario_goal_completion": 4.8,
+                "interactions": 24.43
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 3.4,
+                "scenario_goal_completion": 0.0,
+                "interactions": 36.0
+            },
+            "level 1": {
+                "task_goal_completion": 12.5,
+                "scenario_goal_completion": 0.0,
+                "interactions": 36.0
+            },
+            "level 2": {
+                "task_goal_completion": 3.3,
+                "scenario_goal_completion": 0.0,
+                "interactions": 36.0
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 36.0
+            }
+        }
+    },
+    {
+        "id": "9ae299b8-25c255f5",
+        "method": {
+            "name": "ReAct",
+            "tooltip": "Reason + Act"
+        },
+        "llm": {
+            "name": "DeepSeekCoder",
+            "tooltip": "deepseek-ai/deepseek-coder-33b-instruct"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 7.1,
+                "scenario_goal_completion": 1.8,
+                "interactions": 46.98
+            },
+            "level 1": {
+                "task_goal_completion": 21.1,
+                "scenario_goal_completion": 5.3,
+                "interactions": 46.98
+            },
+            "level 2": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 46.98
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 46.98
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 2.9,
+                "scenario_goal_completion": 0.7,
+                "interactions": 53.78
+            },
+            "level 1": {
+                "task_goal_completion": 16.7,
+                "scenario_goal_completion": 4.2,
+                "interactions": 53.78
+            },
+            "level 2": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 53.78
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 53.78
+            }
+        }
+    },
+    {
+        "id": "871bf9fd-4de66f57",
+        "method": {
+            "name": "PlanExec",
+            "tooltip": "Plan & Execute"
+        },
+        "llm": {
+            "name": "DeepSeekCoder",
+            "tooltip": "deepseek-ai/deepseek-coder-33b-instruct"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 1.8,
+                "scenario_goal_completion": 0.0,
+                "interactions": 71.65
+            },
+            "level 1": {
+                "task_goal_completion": 5.3,
+                "scenario_goal_completion": 0.0,
+                "interactions": 71.65
+            },
+            "level 2": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 71.65
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 71.65
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 0.7,
+                "scenario_goal_completion": 0.0,
+                "interactions": 55.65
+            },
+            "level 1": {
+                "task_goal_completion": 4.2,
+                "scenario_goal_completion": 0.0,
+                "interactions": 55.65
+            },
+            "level 2": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 55.65
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 55.65
+            }
+        }
+    },
+    {
+        "id": "3a889687-923696fe",
+        "method": {
+            "name": "IPFunCall",
+            "tooltip": "Iterative Parallel Function Calling"
+        },
+        "llm": {
+            "name": "GPT-4o",
+            "tooltip": "gpt-4o-2024-05-13"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 32.1,
+                "scenario_goal_completion": 16.1,
+                "interactions": 17.74
+            },
+            "level 1": {
+                "task_goal_completion": 49.1,
+                "scenario_goal_completion": 31.6,
+                "interactions": 17.74
+            },
+            "level 2": {
+                "task_goal_completion": 20.8,
+                "scenario_goal_completion": 6.2,
+                "interactions": 17.74
+            },
+            "level 3": {
+                "task_goal_completion": 25.4,
+                "scenario_goal_completion": 9.5,
+                "interactions": 17.74
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 18.0,
+                "scenario_goal_completion": 10.1,
+                "interactions": 16.12
+            },
+            "level 1": {
+                "task_goal_completion": 27.8,
+                "scenario_goal_completion": 12.5,
+                "interactions": 16.12
+            },
+            "level 2": {
+                "task_goal_completion": 24.0,
+                "scenario_goal_completion": 16.0,
+                "interactions": 16.12
+            },
+            "level 3": {
+                "task_goal_completion": 9.7,
+                "scenario_goal_completion": 4.6,
+                "interactions": 16.12
+            }
+        }
+    },
+    {
+        "id": "c722a232-74b9384b",
+        "method": {
+            "name": "PlanExec",
+            "tooltip": "Plan & Execute"
+        },
+        "llm": {
+            "name": "GPT-4 Turbo",
+            "tooltip": "gpt-4-turbo-2024-04-09"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 32.7,
+                "scenario_goal_completion": 16.1,
+                "interactions": 20.14
+            },
+            "level 1": {
+                "task_goal_completion": 64.9,
+                "scenario_goal_completion": 31.6,
+                "interactions": 20.14
+            },
+            "level 2": {
+                "task_goal_completion": 27.1,
+                "scenario_goal_completion": 18.8,
+                "interactions": 20.14
+            },
+            "level 3": {
+                "task_goal_completion": 7.9,
+                "scenario_goal_completion": 0.0,
+                "interactions": 20.14
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 11.0,
+                "scenario_goal_completion": 3.6,
+                "interactions": 23.97
+            },
+            "level 1": {
+                "task_goal_completion": 36.1,
+                "scenario_goal_completion": 16.7,
+                "interactions": 23.97
+            },
+            "level 2": {
+                "task_goal_completion": 10.7,
+                "scenario_goal_completion": 2.0,
+                "interactions": 23.97
+            },
+            "level 3": {
+                "task_goal_completion": 2.1,
+                "scenario_goal_completion": 0.0,
+                "interactions": 23.97
+            }
+        }
+    },
+    {
+        "id": "08d2ff3e-a0589430",
+        "method": {
+            "name": "IPFunCall",
+            "tooltip": "Iterative Parallel Function Calling"
+        },
+        "llm": {
+            "name": "GPT-4 Turbo",
+            "tooltip": "gpt-4-turbo-2024-04-09"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 30.4,
+                "scenario_goal_completion": 21.4,
+                "interactions": 13.02
+            },
+            "level 1": {
+                "task_goal_completion": 43.9,
+                "scenario_goal_completion": 31.6,
+                "interactions": 13.02
+            },
+            "level 2": {
+                "task_goal_completion": 22.9,
+                "scenario_goal_completion": 18.8,
+                "interactions": 13.02
+            },
+            "level 3": {
+                "task_goal_completion": 23.8,
+                "scenario_goal_completion": 14.3,
+                "interactions": 13.02
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 14.6,
+                "scenario_goal_completion": 9.3,
+                "interactions": 13.56
+            },
+            "level 1": {
+                "task_goal_completion": 22.2,
+                "scenario_goal_completion": 16.7,
+                "interactions": 13.56
+            },
+            "level 2": {
+                "task_goal_completion": 19.3,
+                "scenario_goal_completion": 14.0,
+                "interactions": 13.56
+            },
+            "level 3": {
+                "task_goal_completion": 8.2,
+                "scenario_goal_completion": 3.1,
+                "interactions": 13.56
+            }
+        }
+    },
+    {
+        "id": "d035381e-2d30c0e3",
+        "method": {
+            "name": "FullCodeRefl",
+            "tooltip": "Full Code + Reflection"
+        },
+        "llm": {
+            "name": "GPT-4o",
+            "tooltip": "gpt-4o-2024-05-13"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 33.9,
+                "scenario_goal_completion": 26.8,
+                "interactions": 3.31
+            },
+            "level 1": {
+                "task_goal_completion": 61.4,
+                "scenario_goal_completion": 52.6,
+                "interactions": 3.31
+            },
+            "level 2": {
+                "task_goal_completion": 29.2,
+                "scenario_goal_completion": 25.0,
+                "interactions": 3.31
+            },
+            "level 3": {
+                "task_goal_completion": 12.7,
+                "scenario_goal_completion": 4.8,
+                "interactions": 3.31
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 19.2,
+                "scenario_goal_completion": 12.2,
+                "interactions": 4.39
+            },
+            "level 1": {
+                "task_goal_completion": 54.2,
+                "scenario_goal_completion": 41.7,
+                "interactions": 4.39
+            },
+            "level 2": {
+                "task_goal_completion": 18.7,
+                "scenario_goal_completion": 10.0,
+                "interactions": 4.39
+            },
+            "level 3": {
+                "task_goal_completion": 6.7,
+                "scenario_goal_completion": 3.1,
+                "interactions": 4.39
+            }
+        }
+    },
+    {
+        "id": "ac5b742b-aa0243da",
+        "method": {
+            "name": "PlanExec",
+            "tooltip": "Plan & Execute"
+        },
+        "llm": {
+            "name": "GPT-4o",
+            "tooltip": "gpt-4o-2024-05-13"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 44.6,
+                "scenario_goal_completion": 23.2,
+                "interactions": 31.62
+            },
+            "level 1": {
+                "task_goal_completion": 75.4,
+                "scenario_goal_completion": 47.4,
+                "interactions": 31.62
+            },
+            "level 2": {
+                "task_goal_completion": 39.6,
+                "scenario_goal_completion": 18.8,
+                "interactions": 31.62
+            },
+            "level 3": {
+                "task_goal_completion": 20.6,
+                "scenario_goal_completion": 4.8,
+                "interactions": 31.62
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 19.7,
+                "scenario_goal_completion": 7.9,
+                "interactions": 40.74
+            },
+            "level 1": {
+                "task_goal_completion": 50.0,
+                "scenario_goal_completion": 29.2,
+                "interactions": 40.74
+            },
+            "level 2": {
+                "task_goal_completion": 17.3,
+                "scenario_goal_completion": 6.0,
+                "interactions": 40.74
+            },
+            "level 3": {
+                "task_goal_completion": 10.3,
+                "scenario_goal_completion": 1.5,
+                "interactions": 40.74
+            }
+        }
+    },
+    {
+        "id": "0465049f-bff9fca2",
+        "method": {
+            "name": "FullCodeRefl",
+            "tooltip": "Full Code + Reflection"
+        },
+        "llm": {
+            "name": "DeepSeekCoder",
+            "tooltip": "deepseek-ai/deepseek-coder-33b-instruct"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 13.1,
+                "scenario_goal_completion": 8.9,
+                "interactions": 4.17
+            },
+            "level 1": {
+                "task_goal_completion": 26.3,
+                "scenario_goal_completion": 15.8,
+                "interactions": 4.17
+            },
+            "level 2": {
+                "task_goal_completion": 12.5,
+                "scenario_goal_completion": 12.5,
+                "interactions": 4.17
+            },
+            "level 3": {
+                "task_goal_completion": 1.6,
+                "scenario_goal_completion": 0.0,
+                "interactions": 4.17
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 5.8,
+                "scenario_goal_completion": 2.9,
+                "interactions": 5.46
+            },
+            "level 1": {
+                "task_goal_completion": 29.2,
+                "scenario_goal_completion": 12.5,
+                "interactions": 5.46
+            },
+            "level 2": {
+                "task_goal_completion": 2.0,
+                "scenario_goal_completion": 2.0,
+                "interactions": 5.46
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 5.46
+            }
+        }
+    },
+    {
+        "id": "baf95530-cee120fc",
+        "method": {
+            "name": "FullCodeRefl",
+            "tooltip": "Full Code + Reflection"
+        },
+        "llm": {
+            "name": "LLaMA3-70B",
+            "tooltip": "meta-llama/Llama-3-70b-chat-hf"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 24.4,
+                "scenario_goal_completion": 17.9,
+                "interactions": 3.75
+            },
+            "level 1": {
+                "task_goal_completion": 50.9,
+                "scenario_goal_completion": 36.8,
+                "interactions": 3.75
+            },
+            "level 2": {
+                "task_goal_completion": 22.9,
+                "scenario_goal_completion": 18.8,
+                "interactions": 3.75
+            },
+            "level 3": {
+                "task_goal_completion": 1.6,
+                "scenario_goal_completion": 0.0,
+                "interactions": 3.75
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 7.0,
+                "scenario_goal_completion": 4.3,
+                "interactions": 4.19
+            },
+            "level 1": {
+                "task_goal_completion": 34.7,
+                "scenario_goal_completion": 20.8,
+                "interactions": 4.19
+            },
+            "level 2": {
+                "task_goal_completion": 0.7,
+                "scenario_goal_completion": 0.0,
+                "interactions": 4.19
+            },
+            "level 3": {
+                "task_goal_completion": 1.5,
+                "scenario_goal_completion": 1.5,
+                "interactions": 4.19
+            }
+        }
+    },
+    {
+        "id": "3414a75f-3df6a61f",
+        "method": {
+            "name": "ReAct",
+            "tooltip": "Reason + Act"
+        },
+        "llm": {
+            "name": "GPT-4o",
+            "tooltip": "gpt-4o-2024-05-13"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 48.8,
+                "scenario_goal_completion": 32.1,
+                "interactions": 23.55
+            },
+            "level 1": {
+                "task_goal_completion": 73.7,
+                "scenario_goal_completion": 57.9,
+                "interactions": 23.55
+            },
+            "level 2": {
+                "task_goal_completion": 52.1,
+                "scenario_goal_completion": 31.2,
+                "interactions": 23.55
+            },
+            "level 3": {
+                "task_goal_completion": 23.8,
+                "scenario_goal_completion": 9.5,
+                "interactions": 23.55
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 30.2,
+                "scenario_goal_completion": 13.0,
+                "interactions": 34.24
+            },
+            "level 1": {
+                "task_goal_completion": 58.3,
+                "scenario_goal_completion": 33.3,
+                "interactions": 34.24
+            },
+            "level 2": {
+                "task_goal_completion": 28.7,
+                "scenario_goal_completion": 12.0,
+                "interactions": 34.24
+            },
+            "level 3": {
+                "task_goal_completion": 21.0,
+                "scenario_goal_completion": 6.2,
+                "interactions": 34.24
+            }
+        }
+    },
+    {
+        "id": "571aa685-a8671c57",
+        "method": {
+            "name": "FullCodeRefl",
+            "tooltip": "Full Code + Reflection"
+        },
+        "llm": {
+            "name": "GPT-4 Turbo",
+            "tooltip": "gpt-4-turbo-2024-04-09"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 25.6,
+                "scenario_goal_completion": 19.6,
+                "interactions": 3.07
+            },
+            "level 1": {
+                "task_goal_completion": 43.9,
+                "scenario_goal_completion": 36.8,
+                "interactions": 3.07
+            },
+            "level 2": {
+                "task_goal_completion": 35.4,
+                "scenario_goal_completion": 25.0,
+                "interactions": 3.07
+            },
+            "level 3": {
+                "task_goal_completion": 1.6,
+                "scenario_goal_completion": 0.0,
+                "interactions": 3.07
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 12.5,
+                "scenario_goal_completion": 7.2,
+                "interactions": 4.66
+            },
+            "level 1": {
+                "task_goal_completion": 47.2,
+                "scenario_goal_completion": 33.3,
+                "interactions": 4.66
+            },
+            "level 2": {
+                "task_goal_completion": 9.3,
+                "scenario_goal_completion": 4.0,
+                "interactions": 4.66
+            },
+            "level 3": {
+                "task_goal_completion": 2.1,
+                "scenario_goal_completion": 0.0,
+                "interactions": 4.66
+            }
+        }
+    },
+    {
+        "id": "1f0055c0-123849bb",
+        "method": {
+            "name": "ReAct",
+            "tooltip": "Reason + Act"
+        },
+        "llm": {
+            "name": "GPT-4 Turbo",
+            "tooltip": "gpt-4-turbo-2024-04-09"
+        },
+        "url": "https://appworld.dev",
+        "date": "2024-07-26",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 26.8,
+                "scenario_goal_completion": 12.5,
+                "interactions": 18.75
+            },
+            "level 1": {
+                "task_goal_completion": 50.9,
+                "scenario_goal_completion": 26.3,
+                "interactions": 18.75
+            },
+            "level 2": {
+                "task_goal_completion": 31.2,
+                "scenario_goal_completion": 12.5,
+                "interactions": 18.75
+            },
+            "level 3": {
+                "task_goal_completion": 1.6,
+                "scenario_goal_completion": 0.0,
+                "interactions": 18.75
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 17.5,
+                "scenario_goal_completion": 5.8,
+                "interactions": 26.61
+            },
+            "level 1": {
+                "task_goal_completion": 47.2,
+                "scenario_goal_completion": 20.8,
+                "interactions": 26.61
+            },
+            "level 2": {
+                "task_goal_completion": 16.7,
+                "scenario_goal_completion": 6.0,
+                "interactions": 26.61
+            },
+            "level 3": {
+                "task_goal_completion": 7.2,
+                "scenario_goal_completion": 0.0,
+                "interactions": 26.61
+            }
+        }
+    }
+]
