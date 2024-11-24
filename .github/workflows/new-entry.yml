@@ -39,6 +39,9 @@ jobs:
       - name: Print current branch
         run: echo "$(git branch)"
 
+      - name: Print PR branch
+        run: echo "Head ref: ${{ github.head_ref }}"
+
       # - uses: astral-sh/setup-uv@v3
       #   with:
       #     version: "0.4.4"
