@@ -36,7 +36,7 @@ jobs:
       #   with:
       #     ref: ${{ github.head_ref }}
 
-      - id: 'get-branch'
+      - name: Obtain PR branch
         run: echo ::set-output name=branch::$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')
         env:
           REPO: ${{ github.repository }}
@@ -44,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           ref: ${{ steps.get-branch.outputs.branch }}
 
