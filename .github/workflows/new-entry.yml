@@ -79,7 +79,7 @@ jobs:
             sorted_expected_files=($(for f in "${expected_files[@]}"; do echo "$f"; done | sort))
             expected_sorted=""
             for file in "${sorted_expected_files[@]}"; do
-              expected_sorted+="experiments/outputs/$file/leaderboard.bundle\n"
+              expected_sorted+="experiments/outputs/$file/leaderboard.bundle"$'\n'
             done
             actual_sorted=$(echo "$new_files" | sort)
 
