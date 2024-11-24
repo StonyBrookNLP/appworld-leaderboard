@@ -2,7 +2,7 @@
 
 This is the leaderboard repository of the benchmark proposed in [AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents](https://appworld.dev/) (ACL 2024).
 
-The project's main repository is [here](https://github.com/stonybrooknlp/appworld), and leaderboard UI is [here](https://appworld.dev/leaderboard). This repository stores bundled (encrypted) experiment outputs from participanting models (including our baselines) and the raw [leaderboard data JSON](/experiments/outputs/_leaderboard.json) which is dynamically rendered in the UI. You can use this repository to:
+The project's main repository is [here](https://github.com/stonybrooknlp/appworld), and leaderboard UI is [here](https://appworld.dev/leaderboard). This repository stores bundled (encrypted) experiment outputs from participanting models (including our baselines) and the raw [leaderboard data JSON](/leaderboard.json) which is dynamically rendered in the UI. You can use this repository to:
 
 1. Download and locally view experiment outputs from other participanting methods.
 2. Submit your own agent's experiment outputs to be included on the leaderboard via a PR.
