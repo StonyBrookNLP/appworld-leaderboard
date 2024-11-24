@@ -11,34 +11,25 @@ jobs:
     if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/add-to-leaderboard') }}
     runs-on: ubuntu-latest
     steps:
-      # - name: Extract arguments from comment
-      #   id: extract_args
-      #   run: |
-      #     echo "Extracting arguments..."
-      #     comment="${{ github.event.comment.body }}"
-      #     python_version=$(echo "$comment" | grep -oP '(?<=--python )\S+')
-      #     appworld_version=$(echo "$comment" | grep -oP '(?<=--appworld )\S+')
-      #     experiment_prefix=$(echo "$comment" | grep -oP '(?<=--experiment-prefix )\S+')
-      #     replace_last_flag=$(echo "$comment" | grep -q -- '--replace-last' && echo "true" || echo "false")
+      - name: Extract arguments from comment
+        id: extract_args
+        run: |
+          echo "Extracting arguments..."
+          comment="${{ github.event.comment.body }}"
+          python_version=$(echo "$comment" | grep -oP '(?<=--python )\S+')
+          appworld_version=$(echo "$comment" | grep -oP '(?<=--appworld )\S+')
+          experiment_prefix=$(echo "$comment" | grep -oP '(?<=--experiment-prefix )\S+')
+          replace_last_flag=$(echo "$comment" | grep -q -- '--replace-last' && echo "true" || echo "false")
 
-      #     echo "Python version: $python_version"
-      #     echo "Appworld version: $appworld_version"
-      #     echo "Experiment names: ${{ env.experiment_prefix }}_test_normal and ${{ env.experiment_prefix }}_test_challenge"
-      #     echo "Replace last flag: $replace_last_flag"
+          echo "Python version: $python_version"
+          echo "Appworld version: $appworld_version"
+          echo "Experiment names: ${{ env.experiment_prefix }}_test_normal and ${{ env.experiment_prefix }}_test_challenge"
+          echo "Replace last flag: $replace_last_flag"
 
-      #     echo "python_version=$python_version" >> $GITHUB_ENV
-      #     echo "appworld_version=$appworld_version" >> $GITHUB_ENV
-      #     echo "experiment_prefix=$experiment_prefix" >> $GITHUB_ENV
-      #     echo "replace_last_flag=$replace_last_flag" >> $GITHUB_ENV
-
-      # - name: Checkout repository
-      #   uses: actions/checkout@v3
-      #   with:
-      #     ref: ${{ github.head_ref }}
-
-      # - name: Obtain PR branch
-      #   id: get-branch
-      #   run: echo ::set-output name=branch::$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')
+          echo "python_version=$python_version" >> $GITHUB_ENV
+          echo "appworld_version=$appworld_version" >> $GITHUB_ENV
+          echo "experiment_prefix=$experiment_prefix" >> $GITHUB_ENV
+          echo "replace_last_flag=$replace_last_flag" >> $GITHUB_ENV
 
       - name: Obtain PR branch
         id: get-branch
@@ -49,93 +40,82 @@ jobs:
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout
+      - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.get-branch.outputs.branch }}
 
-      #  - name: Checkout Pull Request
-      #    run: hub pr checkout ${{ github.event.issue.number }}
-      #    env:
-      #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.4.4"
 
-      - name: Print current branch
-        run: echo "$(git branch)"
+      - name: Set up Python
+        run: uv python install ${{ env.python_version }}
 
-      - name: Print PR branch
-        run: echo "${{ github.event.issue.pull_request.head.ref }}"
+      - name: Install venv
+        run: uv venv
 
-      # - uses: astral-sh/setup-uv@v3
-      #   with:
-      #     version: "0.4.4"
+      - name: Install dependencies
+        run: |
+          uv pip install appworld==${{ env.appworld_version }}
+          uv run appworld install
 
-      # - name: Set up Python
-      #   run: uv python install ${{ env.python_version }}
+      - name: Verify PR file changes
+        run: |
+            echo "Checking PR for exactly two new files..."
+            git fetch origin main
+            git checkout main
+            git pull origin main
+            git checkout ${{ github.head_ref }}
+            experiment_prefix="${{ env.experiment_prefix }}"
+            expected_files=("${experiment_prefix}_test_normal" "${experiment_prefix}_test_challenge")
+            new_files=$(git diff --diff-filter=A --name-only origin/main...HEAD)
 
-      # - name: Install venv
-      #   run: uv venv
+            echo "Expected files:"
+            printf "%s\n" "${expected_files[@]}"
+            echo "New files in the PR:"
+            echo "$new_files"
 
-      # - name: Install dependencies
-      #   run: |
-      #     uv pip install appworld==${{ env.appworld_version }}
-      #     uv run appworld install
+            # Sort and compare file lists
+            expected_sorted=$(printf "%s\n" "${expected_files[@]}" | sort)
+            actual_sorted=$(echo "$new_files" | sort)
 
-      # # - name: Verify PR file changes
-      # #   run: |
-      # #       echo "Checking PR for exactly two new files..."
-      # #       git fetch origin main
-      # #       git checkout main
-      # #       git pull origin main
-      # #       git checkout ${{ github.head_ref }}
-      # #       experiment_prefix="${{ env.experiment_prefix }}"
-      # #       expected_files=("${experiment_prefix}_test_normal" "${experiment_prefix}_test_challenge")
-      # #       new_files=$(git diff --diff-filter=A --name-only origin/main...HEAD)
+            if [[ "$expected_sorted" != "$actual_sorted" ]]; then
+              echo "Error: File list does not match the expected files."
+              echo "Expected:"
+              echo "$expected_sorted"
+              echo "Actual:"
+              echo "$actual_sorted"
+              exit 1
+            fi
 
-      # #       echo "Expected files:"
-      # #       printf "%s\n" "${expected_files[@]}"
-      # #       echo "New files in the PR:"
-      # #       echo "$new_files"
+            echo "PR file check passed. The file list matches exactly."
 
-      # #       # Sort and compare file lists
-      # #       expected_sorted=$(printf "%s\n" "${expected_files[@]}" | sort)
-      # #       actual_sorted=$(echo "$new_files" | sort)
+      - name: Unpack experiments
+        run: |
+          uv run appworld unpack ${{ env.experiment_prefix }}_test_normal
+          uv run appworld unpack ${{ env.experiment_prefix }}_test_challenge
 
-      # #       if [[ "$expected_sorted" != "$actual_sorted" ]]; then
-      # #         echo "Error: File list does not match the expected files."
-      # #         echo "Expected:"
-      # #         echo "$expected_sorted"
-      # #         echo "Actual:"
-      # #         echo "$actual_sorted"
-      # #         exit 1
-      # #       fi
+      - name: Run evaluations
+        run: |
+          appworld evaluate ${{ env.experiment_prefix }}_test_normal test_normal
+          appworld evaluate ${{ env.experiment_prefix }}_test_challenge test_challenge
 
-      # #       echo "PR file check passed. The file list matches exactly."
+      - name: Make and add leaderboard entry
+        run: appworld make ${{ env.experiment_prefix }}_test_normal ${{ env.experiment_prefix }}_test_challenge ${{env.replace_last_flag}}
 
-      # - name: Unpack experiments
-      #   run: |
-      #     uv run appworld unpack ${{ env.experiment_prefix }}_test_normal
-      #     uv run appworld unpack ${{ env.experiment_prefix }}_test_challenge
-
-      # - name: Run evaluations
-      #   run: |
-      #     appworld evaluate ${{ env.experiment_prefix }}_test_normal test_normal
-      #     appworld evaluate ${{ env.experiment_prefix }}_test_challenge test_challenge
-
-      # - name: Make and add leaderboard entry
-      #   run: appworld make ${{ env.experiment_prefix }}_test_normal ${{ env.experiment_prefix }}_test_challenge ${{env.replace_last_flag}}
-
-      # - name: Comment with leaderboard entry
-      #   if: ${{ success() }}
-      #   uses: actions/github-script@v6
-      #   with:
-      #     script: |
-      #       const fs = require('fs');
-      #       const entries = JSON.parse(fs.readFileSync('leaderboard.json', 'utf8'));
-      #       const formattedEntry = '```json\n' + JSON.stringify(entries[entries.length - 1], null, 4) + '\n```';
-      #       const commentBody = `### Latest Leaderboard Entry\n${formattedEntry}`;
-      #       const issue_number = context.issue.number;
-      #       await github.rest.issues.createComment({
-      #         ...context.repo,
-      #         issue_number: issue_number,
-      #         body: commentBody,
-      #       });
+      - name: Comment with leaderboard entry
+        if: ${{ success() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const entries = JSON.parse(fs.readFileSync('leaderboard.json', 'utf8'));
+            const formattedEntry = '```json\n' + JSON.stringify(entries[entries.length - 1], null, 4) + '\n```';
+            const commentBody = `### Latest Leaderboard Entry\n${formattedEntry}`;
+            const issue_number = context.issue.number;
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: issue_number,
+              body: commentBody,
+            });
