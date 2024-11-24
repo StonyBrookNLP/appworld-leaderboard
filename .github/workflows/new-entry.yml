@@ -76,8 +76,11 @@ jobs:
             echo "$new_files"
 
             # Sort and compare file lists
-            expected_sorted="experiments/outputs/$(printf "%s\n" "${expected_files[@]}" | sort)/leaderboard.bundle"
-            actual_sorted="experiments/outputs/$(echo "$new_files" | sort)/leaderboard.bundle"
+            expected_sorted=""
+            for file in "${($(for f in "${expected_files[@]}"; do echo "$f"; done | sort))[@]}"; do
+              expected_sorted+="experiments/outputs/$file/leaderboard.bundle\n"
+            done
+            actual_sorted=$(echo "$new_files" | sort)
 
             if [[ "$expected_sorted" != "$actual_sorted" ]]; then
               echo "Error: File list does not match the expected files."
