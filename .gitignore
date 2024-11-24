@@ -2,10 +2,13 @@
 # Ignore everything
 *
 
-# Except README.md, leaderboard.json and .gitignore
+# Except README.md, leaderboard.json, .gitignore and .github
 !README.md
 !leaderboard.json
 !.gitignore
+!.github/
+!.github/workflows/
+!.github/workflows/*
 
 # Except directories and their contents in experiments/outputs that contain leaderboard.bundle
 !experiments/
