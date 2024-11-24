@@ -43,10 +43,10 @@ jobs:
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-       - name: Checkout
-         uses: actions/checkout@v2
-         with:
-           ref: ${{ steps.get-branch.outputs.branch }}
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.get-branch.outputs.branch }}
 
       #  - name: Checkout Pull Request
       #    run: hub pr checkout ${{ github.event.issue.number }}
