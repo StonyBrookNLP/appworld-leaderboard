@@ -21,7 +21,7 @@ jobs:
 
           echo "Python version: $python_version"
           echo "Appworld version: $appworld_version"
-          echo "Experiment names: $experiment_prefix _test_normal and $experiment_prefix _test_challenge"
+          echo "Experiment names: ${{ env.experiment_prefix }}_test_normal and ${{ env.experiment_prefix }}_test_challenge"
           echo "Replace last flag: $replace_last_flag"
 
           echo "python_version=$python_version" >> $GITHUB_ENV
@@ -44,7 +44,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv pip install appworld=={{ env.appworld_version }}
+          uv pip install appworld==${{ env.appworld_version }}
           uv run appworld install
 
       - name: Verify PR file changes
@@ -76,8 +76,8 @@ jobs:
 
       - name: Unpack experiments
         run: |
-          uv run appworld unpack $experiment_prefix _test_normal
-          uv run appworld unpack $experiment_prefix _test_challenge
+          uv run appworld unpack ${{ env.experiment_prefix }}_test_normal
+          uv run appworld unpack ${{ env.experiment_prefix }}_test_challenge
 
       - name: Run evaluations
         run: |
@@ -102,3 +102,4 @@ jobs:
               issue_number: issue_number,
               body: commentBody,
             });
+
