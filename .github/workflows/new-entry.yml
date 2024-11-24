@@ -76,7 +76,7 @@ jobs:
             echo "$new_files"
 
             # Sort and compare file lists
-            expected_sorted=$(echo "$expected_files" | sort)
+            expected_sorted=$(echo "$expected_files[@]" | sort)
             actual_sorted=$(echo "$new_files" | sort)
 
             if [[ "$expected_sorted" != "$actual_sorted" ]]; then
