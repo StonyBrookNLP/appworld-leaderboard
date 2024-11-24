@@ -60,12 +60,15 @@ jobs:
           uv pip install appworld==${{ env.appworld_version }}
           uv run appworld install
 
+      - name: Fetch main branch
+        run: git fetch origin main
+
       - name: Verify PR file changes
         run: |
             echo "Checking PR for exactly two new files..."
             experiment_prefix="${{ env.experiment_prefix }}"
             expected_files=("${experiment_prefix}_test_normal" "${experiment_prefix}_test_challenge")
-            new_files=$(git diff --name-only main...HEAD)
+            new_files=$(git diff --name-only origin/main...HEAD)
 
             echo "Expected files:"
             printf "%s\n" "${expected_files[@]}"
