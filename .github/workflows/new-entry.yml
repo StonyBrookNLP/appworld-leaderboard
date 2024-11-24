@@ -40,7 +40,7 @@ jobs:
         run: echo "$(git branch)"
 
       - name: Print PR branch
-        run: echo "${{ github.head_ref }}"
+        run: echo "${{ github.event.issue.pull_request.head.ref }}"
 
       # - uses: astral-sh/setup-uv@v3
       #   with:
