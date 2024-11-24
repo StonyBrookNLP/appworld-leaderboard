@@ -63,10 +63,6 @@ jobs:
       - name: Verify PR file changes
         run: |
             echo "Checking PR for exactly two new files..."
-            git fetch origin main
-            git checkout main
-            git pull origin main
-            git checkout ${{ github.head_ref }}
             experiment_prefix="${{ env.experiment_prefix }}"
             expected_files=("${experiment_prefix}_test_normal" "${experiment_prefix}_test_challenge")
             new_files=$(git diff --diff-filter=A --name-only origin/main...HEAD)
