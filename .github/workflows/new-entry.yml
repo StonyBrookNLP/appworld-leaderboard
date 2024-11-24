@@ -67,7 +67,7 @@ jobs:
         run: |
             echo "Checking PR for exactly two new files..."
             experiment_prefix="${{ env.experiment_prefix }}"
-            expected_files=("${experiment_prefix}_test_normal" "${experiment_prefix}_test_challenge")
+            expected_files=("experiments/outputs/${experiment_prefix}_test_normal/leaderboard.bundle" "experiments/outputs/${experiment_prefix}_test_challenge/leaderboard.bundle")
             new_files=$(git diff --name-only origin/main..HEAD)
 
             echo "Expected files:"
@@ -76,11 +76,7 @@ jobs:
             echo "$new_files"
 
             # Sort and compare file lists
-            sorted_expected_files=($(for f in "${expected_files[@]}"; do echo "$f"; done | sort))
-            expected_sorted=""
-            for file in "${sorted_expected_files[@]}"; do
-              expected_sorted+="experiments/outputs/$file/leaderboard.bundle"$'\n'
-            done
+            expected_sorted=($(for f in "${expected_files[@]}"; do echo "$f"; done | sort))
             actual_sorted=$(echo "$new_files" | sort)
 
             if [[ "$expected_sorted" != "$actual_sorted" ]]; then
