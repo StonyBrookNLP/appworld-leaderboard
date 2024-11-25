@@ -66,6 +66,9 @@ jobs:
           uv pip install appworld==${{ env.appworld_version }}
           uv run appworld install
 
+      - name: Download appworld data
+        run: uv run appworld download data
+
       - name: Fetch main branch
         run: git fetch origin main
 
