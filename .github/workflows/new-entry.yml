@@ -103,11 +103,11 @@ jobs:
 
       - name: Run evaluations
         run: |
-          appworld evaluate ${{ env.experiment_prefix }}_test_normal test_normal
-          appworld evaluate ${{ env.experiment_prefix }}_test_challenge test_challenge
+          uv run appworld evaluate ${{ env.experiment_prefix }}_test_normal test_normal
+          uv run appworld evaluate ${{ env.experiment_prefix }}_test_challenge test_challenge
 
       - name: Make and add leaderboard entry
-        run: appworld make ${{ env.experiment_prefix }}_test_normal ${{ env.experiment_prefix }}_test_challenge ${{env.replace_last_flag}}
+        run: uv run appworld make ${{ env.experiment_prefix }}_test_normal ${{ env.experiment_prefix }}_test_challenge ${{env.replace_last_flag}}
 
       - name: Comment with leaderboard entry
         if: ${{ success() }}
