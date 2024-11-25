@@ -19,7 +19,7 @@ jobs:
           python_version=$(echo "$comment" | grep -oP '(?<=--python )\S+')
           appworld_version=$(echo "$comment" | grep -oP '(?<=--appworld )\S+')
           experiment_prefix=$(echo "$comment" | grep -oP '(?<=--experiment-prefix )\S+')
-          replace_last_flag=$(echo "$comment" | grep -q -- '--replace-last' && echo "true" || echo "false")
+          replace_last_flag=$(echo "$comment" | grep -q -- '--replace-last' && echo "--replace-last" || echo "")
 
           echo "Python version: $python_version"
           echo "Appworld version: $appworld_version"
