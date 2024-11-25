@@ -45,6 +45,12 @@ jobs:
         with:
           ref: ${{ steps.get-branch.outputs.branch }}
 
+      - name: Pull LFS files
+        run: |
+          echo "Fetching and checking out LFS files..."
+          git lfs install
+          git lfs pull
+
       - uses: astral-sh/setup-uv@v3
         with:
           version: "0.4.4"
