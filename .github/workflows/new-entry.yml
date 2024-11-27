@@ -13,21 +13,10 @@ jobs:
     steps:
 
       - name: Debug LFS Configuration
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          FILE_PATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
-          # Direct download using GitHub CLI
-          gh api \
-          -H "Accept: application/vnd.github.v3.raw" \
-          "/repos/${{ github.repository }}/contents/$FILE_PATH?ref=test-pr" \
-          > "$FILE_PATH"
-          echo "After direct download:"
-          ls -la "$FILE_PATH"
-          du -sh "$FILE_PATH"
-
-
-
+          curl -L -o leaderboard.bundle \
+            https://github.com/stonybrooknlp/appworld-leaderboard/raw/main/experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          du -sh leaderboard.bundle
 
 #       # - name: Checkout repository
 #       #   uses: actions/checkout@v4
