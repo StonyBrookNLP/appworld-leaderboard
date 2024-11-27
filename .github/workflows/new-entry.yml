@@ -9,8 +9,8 @@ jobs:
     if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/add-to-leaderboard') }}
     runs-on: ubuntu-latest
     steps:
-      - name: Install LFS
-        run: git lfs install
+      # - name: Install LFS
+      #   run: git lfs install
 
       - name: Checkout code
         uses: actions/checkout@v2
