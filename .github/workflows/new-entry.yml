@@ -54,51 +54,103 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout PR branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: test-pr
-          lfs: false  # Disable automatic LFS checkout
-      
-      - name: Manual LFS Fetch
+          fetch-depth: 0
+          lfs: false  # Disable automatic LFS handling
+
+      - name: Setup Git and LFS
         run: |
           git lfs install
+          git config --global core.longpaths true
+          git config --global lfs.fetchexclude ""
+          git config --global lfs.fetchinclude "*"
+
+      - name: Manual Checkout and LFS Fetch
+        run: |
           git fetch origin test-pr
           git checkout test-pr
-          git lfs fetch origin test-pr --all
-          git lfs checkout
+          git lfs fetch origin test-pr
           git lfs pull origin test-pr
-      
-      - name: Verify LFS file size
+
+      - name: Debug LFS Configuration
         run: |
-          ls -lh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          echo "LFS Configuration:"
+          git config --list | grep lfs
+          echo "\nLFS Tracking:"
+          git lfs track
+          echo "\nLFS Status:"
+          git lfs status
+
+      - name: Verify LFS File
+        run: |
+          echo "File Details:"
+          ls -la experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
           du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
-      - name: LFS Debugging
+      - name: Alternative Download Method
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Git LFS Version:"
-          git lfs version
+          FILE_PATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
           
-          echo "::group::Git Config"
-          git config --list
-          echo "::endgroup::"
+          # Direct download using GitHub CLI
+          gh api \
+            -H "Accept: application/vnd.github.v3.raw" \
+            "/repos/${{ github.repository }}/contents/$FILE_PATH?ref=test-pr" \
+            > "$FILE_PATH"
+
+          echo "After direct download:"
+          ls -la "$FILE_PATH"
+          du -sh "$FILE_PATH"
+
+      # - name: Checkout PR branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: test-pr
+      #     lfs: false  # Disable automatic LFS checkout
+      
+      # - name: Manual LFS Fetch
+      #   run: |
+      #     git lfs install
+      #     git fetch origin test-pr
+      #     git checkout test-pr
+      #     git lfs fetch origin test-pr --all
+      #     git lfs checkout
+      #     git lfs pull origin test-pr
+      
+      # - name: Verify LFS file size
+      #   run: |
+      #     ls -lh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      #     du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+
+      # - name: LFS Debugging
+      #   run: |
+      #     echo "Git LFS Version:"
+      #     git lfs version
           
-          echo "::group::LFS Pointer Details"
-          git lfs pointer --file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-          echo "::endgroup::"
+      #     echo "::group::Git Config"
+      #     git config --list
+      #     echo "::endgroup::"
           
-          echo "::group::LFS File List"
-          git lfs ls-files -l
-          echo "::endgroup::"
+      #     echo "::group::LFS Pointer Details"
+      #     git lfs pointer --file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      #     echo "::endgroup::"
           
-          echo "::group::Check LFS File Permissions"
-          ls -l experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-          echo "::endgroup::"
+      #     echo "::group::LFS File List"
+      #     git lfs ls-files -l
+      #     echo "::endgroup::"
           
-          echo "::group::File Content Check"
-          file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-          cat experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-          echo "::endgroup::"
+      #     echo "::group::Check LFS File Permissions"
+      #     ls -l experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      #     echo "::endgroup::"
+          
+      #     echo "::group::File Content Check"
+      #     file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      #     cat experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      #     echo "::endgroup::"
 
       # - name: Checkout repository
       #   uses: actions/checkout@v4
