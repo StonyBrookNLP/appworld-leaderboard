@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  add-new-entry:
+  add-entry:
     if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/add-to-leaderboard') }}
     runs-on: ubuntu-latest
     steps:
@@ -140,5 +140,85 @@ jobs:
             git add -f experiments/outputs/_leaderboard.json
             git commit -m "add leaderboard entry"
             git push origin ${{ steps.get-branch.outputs.branch }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  remove-entry:
+    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/remove-from-leaderboard') }}
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Obtain PR branch
+        id: get-branch
+        run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
+        env:
+          REPO: ${{ github.repository }}
+          PR_NO: ${{ github.event.issue.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.get-branch.outputs.branch }}
+
+      - name: Extract arguments from comment
+        id: extract_args
+        run: |
+          echo "Extracting arguments..."
+          comment="${{ github.event.comment.body }}"
+          entry_id=$(echo "$comment" | grep -oP '(?<=--entry-id )\S+')
+          echo "Entry ID: $entry_id"
+          echo "entry_id=$entry_id" >> $GITHUB_ENV
+
+      - name: Remove leaderboard entry, commit and comment
+        if: env.entry_id
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const entryId = process.env.entry_id;
+            const repoOwner = context.repo.owner;
+            const repoName = context.repo.repo;
+            const prNumber = context.payload.issue.number;
+
+            const leaderboardPath = path.join(process.cwd(), 'experiments/outputs/_leaderboard.json');
+
+            // Load leaderboard.json
+            if (!fs.existsSync(leaderboardPath)) {
+              throw new Error('experiments/outputs/_leaderboard.json not found in the repository root.');
+            }
+
+            const leaderboard = JSON.parse(fs.readFileSync(leaderboardPath, 'utf8'));
+            const updatedLeaderboard = leaderboard.filter(entry => entry.id !== entryId);
+            const removedEntries = leaderboard.filter(entry => entry.id === entryId);
+
+            if (removedEntries.length === 0) {
+              const issue_number = context.issue.number;
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: issue_number,
+                body: `No entry found with ID \`${entryId}\`.`,
+              });
+              return;
+            }
+
+            // Write the updated leaderboard back to the file
+            fs.writeFileSync(leaderboardPath, JSON.stringify(updatedLeaderboard, null, 2));
+
+            // Commit the changes
+            await exec('git', ['config', 'user.name', 'github-actions[bot]']);
+            await exec('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com']);
+            await exec('git', ['add', 'leaderboard.json']);
+            await exec('git', ['commit', '-m', `Remove ID ${entryId} from leaderboard`]);
+            await exec('git', ['push', '--set-upstream', 'origin', context.ref]);
+
+            // Post a comment showing the removed entry
+            const removedEntry = JSON.stringify(removedEntries[0], null, 2);
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: issue_number,
+              body: `Removed the following entry from the leaderboard:\n\`\`\`json\n${removedEntry}\n\`\`\``
+            });
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
