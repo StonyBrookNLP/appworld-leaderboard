@@ -1,4 +1,4 @@
-name: Add leaderboard entry
+name: Manage leaderboard
 
 on:
   issue_comment:
@@ -165,7 +165,7 @@ jobs:
         run: |
           echo "Extracting arguments..."
           comment="${{ github.event.comment.body }}"
-          entry_id=$(echo "$comment" | grep -oP '(?<=--entry-id )\S+')
+          entry_id=$(echo "$comment" | grep -oP '(?<=/remove-from-leaderboard\s+)\S+')
           echo "Entry ID: $entry_id"
           echo "entry_id=$entry_id" >> $GITHUB_ENV
 
