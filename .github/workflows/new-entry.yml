@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Obtain PR branch
         id: get-branch
         run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
@@ -23,7 +20,12 @@ jobs:
           PR_NO: ${{ github.event.issue.number }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Debug LFS Configuration
+      - name: Checkout PR branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.get-branch.outputs.branch }}
+
+      - name: Download relevant files
         run: |
           # DIRECTORY=experiments/outputs/full_code_refl_deepseekcoder_test_normal
           # mkdir ${DIRECTORY}
