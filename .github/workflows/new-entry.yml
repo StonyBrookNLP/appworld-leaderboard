@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Debug LFS Configuration
         run: |
           DIRECTORY=experiments/outputs/full_code_refl_deepseekcoder_test_normal
