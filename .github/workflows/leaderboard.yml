@@ -203,7 +203,7 @@ jobs:
             }
 
             // Write the updated leaderboard back to the file
-            fs.writeFileSync(leaderboardPath, JSON.stringify(updatedLeaderboard, null, 2));
+            fs.writeFileSync(leaderboardPath, JSON.stringify(updatedLeaderboard, null, 4));
 
             // Post a comment showing the removed entry
             const removedEntry = JSON.stringify(removedEntries[0], null, 2);
