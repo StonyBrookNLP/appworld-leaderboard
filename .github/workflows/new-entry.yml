@@ -15,13 +15,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Obtain PR branch
+        id: get-branch
+        run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
+        env:
+          REPO: ${{ github.repository }}
+          PR_NO: ${{ github.event.issue.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Debug LFS Configuration
         run: |
           # DIRECTORY=experiments/outputs/full_code_refl_deepseekcoder_test_normal
           # mkdir ${DIRECTORY}
           DIRECTORY=experiments/outputs/full_code_refl_deepseekcoder_test_normal
           FILE_PATH=${DIRECTORY}/leaderboard.bundle
-          curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/raw/main/${FILE_PATH}
+          curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/${{ steps.get-branch.outputs.branch }}/main/${FILE_PATH}
           du -sh ${FILE_PATH}
           cat ${FILE_PATH}
 
@@ -251,13 +259,7 @@ jobs:
 #       #   with:
 #       #     lfs: true
 
-#       # - name: Obtain PR branch
-#       #   id: get-branch
-#       #   run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
-#       #   env:
-#       #     REPO: ${{ github.repository }}
-#       #     PR_NO: ${{ github.event.issue.number }}
-#       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 # #       # - name: Extract arguments from comment
@@ -279,6 +281,7 @@ jobs:
 # #       #     echo "appworld_version=$appworld_version" >> $GITHUB_ENV
 # #       #     echo "experiment_prefix=$experiment_prefix" >> $GITHUB_ENV
 # #       #     echo "replace_last_flag=$replace_last_flag" >> $GITHUB_ENV
+
 
 # #       # - name: Checkout PR branch
 # #       #   uses: actions/checkout@v4
