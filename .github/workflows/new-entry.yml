@@ -68,6 +68,10 @@ jobs:
         with:
           ref: ${{ steps.get-branch.outputs.branch }}
           lfs: true
+        env:
+          REPO: ${{ github.repository }}
+          PR_NO: ${{ github.event.issue.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Show LFS file size
         run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
@@ -91,11 +95,6 @@ jobs:
 #       #     echo "appworld_version=$appworld_version" >> $GITHUB_ENV
 #       #     echo "experiment_prefix=$experiment_prefix" >> $GITHUB_ENV
 #       #     echo "replace_last_flag=$replace_last_flag" >> $GITHUB_ENV
-
-#       #   env:
-#       #     REPO: ${{ github.repository }}
-#       #     PR_NO: ${{ github.event.issue.number }}
-#       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #       # - name: Checkout PR branch
 #       #   uses: actions/checkout@v4
