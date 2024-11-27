@@ -106,6 +106,51 @@ jobs:
           ls -la "$FILE_PATH"
           du -sh "$FILE_PATH"
 
+
+      - name: Exhaustive LFS Debugging
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "GitHub Repository: ${{ github.repository }}"
+          echo "Current Branch: $(git branch --show-current)"
+          
+          echo "::group::Git LFS Verbose Information"
+          GIT_LFS_DEBUG=1 git lfs ls-files -l
+          echo "::endgroup::"
+          
+          echo "::group::GitHub API File Information"
+          FILEPATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
+          
+          # Get file metadata from GitHub API
+          gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/${{ github.repository }}/contents/$FILEPATH?ref=test-pr" | jq .
+          
+          # Try to get the blob SHA
+          BLOB_SHA=$(git ls-tree -r test-pr | grep "$FILEPATH" | awk '{print $3}')
+          echo "Blob SHA: $BLOB_SHA"
+          
+          # Attempt to fetch blob details
+          if [ ! -z "$BLOB_SHA" ]; then
+            gh api \
+              -H "Accept: application/vnd.github+json" \
+              "/repos/${{ github.repository }}/git/blobs/$BLOB_SHA"
+          fi
+          echo "::endgroup::"
+      
+      - name: Verify Local vs Remote Tracking
+        run: |
+          # Compare local and remote LFS tracking
+          echo "Local Tracking:"
+          git lfs track
+          
+          echo "\nRemote Tracking:"
+          git ls-remote --refs origin test-pr
+          
+          echo "\nLFS Pointer Details:"
+          git lfs pointer --file "experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
+
+
       # - name: Checkout PR branch
       #   uses: actions/checkout@v4
       #   with:
