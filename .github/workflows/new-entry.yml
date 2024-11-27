@@ -61,7 +61,7 @@ jobs:
       #     git lfs checkout
 
       - name: Checkout LFS objects
-        run: git lfs checkout
+        run: git lfs experiments/outputs/full_code_refl_deepseekcoder_test_challenge/leaderboard.bundle
 
       # - name: Check out LFS objects
       #   run: git lfs checkout experiments/outputs/full_code_refl_deepseekcoder_test_challenge/leaderboard.bundle
