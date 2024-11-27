@@ -74,6 +74,32 @@ jobs:
           ls -lh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
           du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
+      - name: LFS Debugging
+        run: |
+          echo "Git LFS Version:"
+          git lfs version
+          
+          echo "::group::Git Config"
+          git config --list
+          echo "::endgroup::"
+          
+          echo "::group::LFS Pointer Details"
+          git lfs pointer --file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          echo "::endgroup::"
+          
+          echo "::group::LFS File List"
+          git lfs ls-files -l
+          echo "::endgroup::"
+          
+          echo "::group::Check LFS File Permissions"
+          ls -l experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          echo "::endgroup::"
+          
+          echo "::group::File Content Check"
+          file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          cat experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          echo "::endgroup::"
+
       # - name: Checkout repository
       #   uses: actions/checkout@v4
       #   with:
