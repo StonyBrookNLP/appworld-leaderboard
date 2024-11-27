@@ -73,8 +73,8 @@ jobs:
           ref: ${{ steps.get-branch.outputs.branch }}
           lfs: true
 
-      # - name: Git LFS Pull 
-      #   run: git lfs pull
+      - name: Git LFS Pull 
+        run: git lfs pull
 
       - name: Show LFS file size
         run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
