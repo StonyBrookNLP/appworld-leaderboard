@@ -106,13 +106,13 @@ jobs:
         run: |
           uv run appworld unpack ${{ env.experiment_prefix }}_test_normal
           uv run appworld unpack ${{ env.experiment_prefix }}_test_challenge
+          ls experiments/outputs/temp_test_test_normal/
+          ls experiments/outputs/temp_test_test_challenge/
 
       - name: Run evaluations
         run: |
           uv run appworld evaluate ${{ env.experiment_prefix }}_test_normal test_normal
           uv run appworld evaluate ${{ env.experiment_prefix }}_test_challenge test_challenge
-          ls experiments/outputs/temp_test_test_normal/
-          ls experiments/outputs/temp_test_test_challenge/
 
       - name: Make and add leaderboard entry
         run: uv run appworld make ${{ env.experiment_prefix }}_test_normal ${{ env.experiment_prefix }}_test_challenge ${{env.replace_last_flag}}
