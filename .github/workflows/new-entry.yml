@@ -46,11 +46,9 @@ jobs:
           ref: ${{ steps.get-branch.outputs.branch }}
           lfs: true
 
-      - name: Pull LFS files
-        run: git lfs pull
-
-      - name: Verify LFS files
-        run: git lfs ls-files
+      - name: checkoutLFS
+        uses: actions/checkout@v2
+      - run: git lfs pull
 
       - name: Show LFS file size
         run: du -sh experiments/outputs/temp_test_test_challenge/leaderboard.bundle
