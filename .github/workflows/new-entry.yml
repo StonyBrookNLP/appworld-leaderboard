@@ -83,13 +83,6 @@ jobs:
           echo "\nLFS Status:"
           git lfs status
 
-      - name: Verify LFS File
-        run: |
-          echo "File Details:"
-          ls -la experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-          file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-          du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-
       - name: Alternative Download Method
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -106,49 +99,90 @@ jobs:
           ls -la "$FILE_PATH"
           du -sh "$FILE_PATH"
 
+      - name: Verify LFS File
+        run: |
+          echo "File Details:"
+          ls -la experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
-      - name: Exhaustive LFS Debugging
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "GitHub Repository: ${{ github.repository }}"
-          echo "Current Branch: $(git branch --show-current)"
-          
-          echo "::group::Git LFS Verbose Information"
-          GIT_LFS_DEBUG=1 git lfs ls-files -l
-          echo "::endgroup::"
-          
-          echo "::group::GitHub API File Information"
-          FILEPATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
-          
-          # Get file metadata from GitHub API
-          gh api \
-            -H "Accept: application/vnd.github+json" \
-            "/repos/${{ github.repository }}/contents/$FILEPATH?ref=test-pr" | jq .
-          
-          # Try to get the blob SHA
-          BLOB_SHA=$(git ls-tree -r test-pr | grep "$FILEPATH" | awk '{print $3}')
-          echo "Blob SHA: $BLOB_SHA"
-          
-          # Attempt to fetch blob details
-          if [ ! -z "$BLOB_SHA" ]; then
-            gh api \
-              -H "Accept: application/vnd.github+json" \
-              "/repos/${{ github.repository }}/git/blobs/$BLOB_SHA"
-          fi
-          echo "::endgroup::"
-      
-      - name: Verify Local vs Remote Tracking
-        run: |
-          # Compare local and remote LFS tracking
-          echo "Local Tracking:"
-          git lfs track
-          
-          echo "\nRemote Tracking:"
-          git ls-remote --refs origin test-pr
-          
-          echo "\nLFS Pointer Details:"
-          git lfs pointer --file "experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
+
+
+      # - name: Decode and Write LFS Pointer
+        # run: |
+          Decode the base64 LFS pointer content
+          # echo "$LFS_POINTER_CONTENT" | base64 -d > lfs_pointer.txt
+          # cat lfs_pointer.txt
+      # 
+      # - name: Manual LFS File Retrieval
+        # env:
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # run: |
+          # FILE_PATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
+          # 
+          Extract OID from the LFS pointer
+          # OID=$(grep "oid sha256:" lfs_pointer.txt | cut -d: -f2 | tr -d ' ')
+          # 
+          Attempt to download using the OID
+          # DOWNLOAD_URL="https://github.com/StonyBrookNLP/appworld-leaderboard/raw/test-pr/$FILE_PATH"
+          # 
+          # echo "Attempting to download: $DOWNLOAD_URL"
+          # echo "Expected OID: $OID"
+          # 
+          Try multiple download methods
+          # curl -L -H "Authorization: token $GITHUB_TOKEN" "$DOWNLOAD_URL" -o "$FILE_PATH" || \
+          # wget --header="Authorization: token $GITHUB_TOKEN" "$DOWNLOAD_URL" -O "$FILE_PATH" || \
+          # gh api \
+            # -H "Accept: application/vnd.github.v3.raw" \
+            # "/repos/StonyBrookNLP/appworld-leaderboard/contents/$FILE_PATH?ref=test-pr" > "$FILE_PATH"
+          # 
+          # echo "File after download:"
+          # ls -lh "$FILE_PATH"
+          # du -sh "$FILE_PATH"
+
+
+      # - name: Exhaustive LFS Debugging
+        # env:
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # run: |
+          # echo "GitHub Repository: ${{ github.repository }}"
+          # echo "Current Branch: $(git branch --show-current)"
+          # 
+          # echo "::group::Git LFS Verbose Information"
+          # GIT_LFS_DEBUG=1 git lfs ls-files -l
+          # echo "::endgroup::"
+          # 
+          # echo "::group::GitHub API File Information"
+          # FILEPATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
+          # 
+          Get file metadata from GitHub API
+          # gh api \
+            # -H "Accept: application/vnd.github+json" \
+            # "/repos/${{ github.repository }}/contents/$FILEPATH?ref=test-pr" | jq .
+          # 
+          Try to get the blob SHA
+          # BLOB_SHA=$(git ls-tree -r test-pr | grep "$FILEPATH" | awk '{print $3}')
+          # echo "Blob SHA: $BLOB_SHA"
+          # 
+          Attempt to fetch blob details
+          # if [ ! -z "$BLOB_SHA" ]; then
+            # gh api \
+              # -H "Accept: application/vnd.github+json" \
+              # "/repos/${{ github.repository }}/git/blobs/$BLOB_SHA"
+          # fi
+          # echo "::endgroup::"
+      # 
+      # - name: Verify Local vs Remote Tracking
+        # run: |
+          Compare local and remote LFS tracking
+          # echo "Local Tracking:"
+          # git lfs track
+          # 
+          # echo "\nRemote Tracking:"
+          # git ls-remote --refs origin test-pr
+          # 
+          # echo "\nLFS Pointer Details:"
+          # git lfs pointer --file "experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
 
 
       # - name: Checkout PR branch
