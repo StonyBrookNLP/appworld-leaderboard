@@ -31,7 +31,7 @@ jobs:
           # mkdir ${DIRECTORY}
           DIRECTORY=experiments/outputs/full_code_refl_deepseekcoder_test_normal
           FILE_PATH=${DIRECTORY}/leaderboard.bundle
-          curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/${{ steps.get-branch.outputs.branch }}/main/${FILE_PATH}
+          curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/raw/${{ steps.get-branch.outputs.branch }}/${FILE_PATH}
           du -sh ${FILE_PATH}
           cat ${FILE_PATH}
 
