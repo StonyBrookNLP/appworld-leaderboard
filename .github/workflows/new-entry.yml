@@ -44,6 +44,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.get-branch.outputs.branch }}
+          lfs: 'true'
 
       - name: Pull LFS files
         run: |
