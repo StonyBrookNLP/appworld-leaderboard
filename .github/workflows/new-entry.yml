@@ -97,8 +97,10 @@ jobs:
         run: |
           FILE_PATH=experiments/outputs/${experiment_prefix}_test_normal/leaderboard.bundle
           curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/raw/${{ steps.get-branch.outputs.branch }}/${FILE_PATH}
+          du -sh ${FILE_PATH}
           FILE_PATH=experiments/outputs/${experiment_prefix}_test_challenge/leaderboard.bundle
           curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/raw/${{ steps.get-branch.outputs.branch }}/${FILE_PATH}
+          du -sh ${FILE_PATH}
 
       - name: Unpack experiments
         run: |
