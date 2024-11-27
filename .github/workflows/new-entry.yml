@@ -54,11 +54,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout PR branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: test-pr
-          lfs: true
+          fetch-depth: 0
+
+      - name: Checkout specific branch
+        run: |
+          git checkout test-pr
+          git lfs pull
+          git lfs checkout
+
+      # - name: Checkout PR branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: test-pr
+      #     lfs: true
 
       - name: Debugging LFS
         run: |
