@@ -46,11 +46,11 @@ jobs:
           ref: ${{ steps.get-branch.outputs.branch }}
           lfs: true
 
-      - name: Pull LFS files
-        run: |
-          echo "Fetching and checking out LFS files..."
-          git lfs install
-          git lfs pull
+      # - name: Pull LFS files
+      #   run: |
+      #     echo "Fetching and checking out LFS files..."
+      #     git lfs install
+      #     git lfs pull
 
       - name: Cat files
         run: du -sh experiments/outputs/temp_test_test_challenge/leaderboard.bundle
