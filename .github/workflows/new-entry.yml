@@ -47,7 +47,7 @@ jobs:
       #     lfs: true
 
       - name: Checkout PR branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         with:
           lfs: true
         # with:
