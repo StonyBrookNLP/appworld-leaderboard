@@ -50,10 +50,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.get-branch.outputs.branch }}
-          run: git lfs fetch --all
+          # run: git lfs fetch --all
 
       - name: Pull LFS files
-        run: git lfs fetch --all
+        run: |
+          git lfs fetch --all
+          git lfs pull
+          git lfs checkout
 
       - name: Show LFS
         run: du -sh experiments/outputs/temp_test_test_challenge/leaderboard.bundle
