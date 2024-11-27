@@ -52,7 +52,7 @@ jobs:
           git lfs pull
 
       - name: Cat files
-        run: cat experiments/outputs/temp_test_test_challenge/leaderboard.bundle
+        run: du -sh experiments/outputs/temp_test_test_challenge/leaderboard.bundle
 
       - uses: astral-sh/setup-uv@v3
         with:
