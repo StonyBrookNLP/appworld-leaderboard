@@ -54,30 +54,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Obtain PR branch
-        id: get-branch
-        run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
-        env:
-          REPO: ${{ github.repository }}
-          PR_NO: ${{ github.event.issue.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: test-pr
+          lfs: true
+          fetch-depth: 0
+
+      - name: Show LFS file size
+        run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
       # - name: Checkout code
       #   uses: actions/checkout@v2
       #   with:
       #     lfs: true
 
-      - name: Checkout PR branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ steps.get-branch.outputs.branch }}
-          lfs: true
+      # - name: Obtain PR branch
+      #   id: get-branch
+      #   run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
+      #   env:
+      #     REPO: ${{ github.repository }}
+      #     PR_NO: ${{ github.event.issue.number }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Git LFS Pull 
-        run: echo ${{ steps.get-branch.outputs.branch }}
-
-      - name: Show LFS file size
-        run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
 #       # - name: Extract arguments from comment
 #       #   id: extract_args
