@@ -53,14 +53,24 @@ jobs:
     if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/add-to-leaderboard') }}
     runs-on: ubuntu-latest
     steps:
+
+      - name: Obtain PR branch
+        id: get-branch
+        run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
+
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           lfs: true
 
+      # - name: Checkout PR branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: ${{ steps.get-branch.outputs.branch }}
+      #     lfs: true
+
       - name: Show LFS file size
         run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-
 
 #       # - name: Extract arguments from comment
 #       #   id: extract_args
@@ -81,10 +91,6 @@ jobs:
 #       #     echo "appworld_version=$appworld_version" >> $GITHUB_ENV
 #       #     echo "experiment_prefix=$experiment_prefix" >> $GITHUB_ENV
 #       #     echo "replace_last_flag=$replace_last_flag" >> $GITHUB_ENV
-
-#       # - name: Obtain PR branch
-#       #   id: get-branch
-#       #   run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
 
 #       #   env:
 #       #     REPO: ${{ github.repository }}
