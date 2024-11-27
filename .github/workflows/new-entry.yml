@@ -58,6 +58,9 @@ jobs:
           git lfs pull
           git lfs checkout
 
+      - name: Check out LFS objects
+        run: git lfs checkout experiments/outputs/temp_test_test_challenge/leaderboard.bundle
+
       - name: Show LFS
         run: du -sh experiments/outputs/temp_test_test_challenge/leaderboard.bundle
 
