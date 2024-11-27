@@ -54,57 +54,67 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          lfs: false  # Disable automatic LFS handling
-
-      - name: Setup Git and LFS
-        run: |
-          git lfs install
-          git config --global core.longpaths true
-          git config --global lfs.fetchexclude ""
-          git config --global lfs.fetchinclude "*"
-
-      - name: Manual Checkout and LFS Fetch
-        run: |
-          git fetch origin test-pr
-          git checkout test-pr
-          git lfs fetch origin test-pr
-          git lfs pull origin test-pr
-
       - name: Debug LFS Configuration
         run: |
-          echo "LFS Configuration:"
-          git config --list | grep lfs
-          echo "\nLFS Tracking:"
-          git lfs track
-          echo "\nLFS Status:"
-          git lfs status
-
-      - name: Alternative Download Method
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
           FILE_PATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
-          
           # Direct download using GitHub CLI
           gh api \
-            -H "Accept: application/vnd.github.v3.raw" \
-            "/repos/${{ github.repository }}/contents/$FILE_PATH?ref=test-pr" \
-            > "$FILE_PATH"
-
+          -H "Accept: application/vnd.github.v3.raw" \
+          "/repos/${{ github.repository }}/contents/$FILE_PATH?ref=test-pr" \
+          > "$FILE_PATH"
           echo "After direct download:"
           ls -la "$FILE_PATH"
           du -sh "$FILE_PATH"
 
-      - name: Verify LFS File
-        run: |
-          echo "File Details:"
-          ls -la experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-          file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-          du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      # - name: Checkout repository
+      #   uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: 0
+      #     lfs: false  # Disable automatic LFS handling
+
+      # - name: Setup Git and LFS
+      #   run: |
+      #     git lfs install
+      #     git config --global core.longpaths true
+      #     git config --global lfs.fetchexclude ""
+      #     git config --global lfs.fetchinclude "*"
+
+      # - name: Manual Checkout and LFS Fetch
+      #   run: |
+      #     git fetch origin test-pr
+      #     git checkout test-pr
+      #     git lfs fetch origin test-pr
+      #     git lfs pull origin test-pr
+
+      # - name: Debug LFS Configuration
+      #   run: |
+      #     echo "LFS Configuration:"
+      #     git config --list | grep lfs
+      #     echo "\nLFS Tracking:"
+      #     git lfs track
+      #     echo "\nLFS Status:"
+      #     git lfs status
+
+      # - name: Alternative Download Method
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     FILE_PATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
+      #     # Direct download using GitHub CLI
+      #     gh api \
+      #       -H "Accept: application/vnd.github.v3.raw" \
+      #       "/repos/${{ github.repository }}/contents/$FILE_PATH?ref=test-pr" \
+      #       > "$FILE_PATH"
+      #     echo "After direct download:"
+      #     ls -la "$FILE_PATH"
+      #     du -sh "$FILE_PATH"
+
+      # - name: Verify LFS File
+      #   run: |
+      #     echo "File Details:"
+      #     ls -la experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      #     file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      #     du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
 
 
@@ -113,29 +123,29 @@ jobs:
           Decode the base64 LFS pointer content
           # echo "$LFS_POINTER_CONTENT" | base64 -d > lfs_pointer.txt
           # cat lfs_pointer.txt
-      # 
+      #
       # - name: Manual LFS File Retrieval
         # env:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         # run: |
           # FILE_PATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
-          # 
+          #
           Extract OID from the LFS pointer
           # OID=$(grep "oid sha256:" lfs_pointer.txt | cut -d: -f2 | tr -d ' ')
-          # 
+          #
           Attempt to download using the OID
           # DOWNLOAD_URL="https://github.com/StonyBrookNLP/appworld-leaderboard/raw/test-pr/$FILE_PATH"
-          # 
+          #
           # echo "Attempting to download: $DOWNLOAD_URL"
           # echo "Expected OID: $OID"
-          # 
+          #
           Try multiple download methods
           # curl -L -H "Authorization: token $GITHUB_TOKEN" "$DOWNLOAD_URL" -o "$FILE_PATH" || \
           # wget --header="Authorization: token $GITHUB_TOKEN" "$DOWNLOAD_URL" -O "$FILE_PATH" || \
           # gh api \
             # -H "Accept: application/vnd.github.v3.raw" \
             # "/repos/StonyBrookNLP/appworld-leaderboard/contents/$FILE_PATH?ref=test-pr" > "$FILE_PATH"
-          # 
+          #
           # echo "File after download:"
           # ls -lh "$FILE_PATH"
           # du -sh "$FILE_PATH"
@@ -147,23 +157,23 @@ jobs:
         # run: |
           # echo "GitHub Repository: ${{ github.repository }}"
           # echo "Current Branch: $(git branch --show-current)"
-          # 
+          #
           # echo "::group::Git LFS Verbose Information"
           # GIT_LFS_DEBUG=1 git lfs ls-files -l
           # echo "::endgroup::"
-          # 
+          #
           # echo "::group::GitHub API File Information"
           # FILEPATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
-          # 
+          #
           Get file metadata from GitHub API
           # gh api \
             # -H "Accept: application/vnd.github+json" \
             # "/repos/${{ github.repository }}/contents/$FILEPATH?ref=test-pr" | jq .
-          # 
+          #
           Try to get the blob SHA
           # BLOB_SHA=$(git ls-tree -r test-pr | grep "$FILEPATH" | awk '{print $3}')
           # echo "Blob SHA: $BLOB_SHA"
-          # 
+          #
           Attempt to fetch blob details
           # if [ ! -z "$BLOB_SHA" ]; then
             # gh api \
@@ -171,16 +181,16 @@ jobs:
               # "/repos/${{ github.repository }}/git/blobs/$BLOB_SHA"
           # fi
           # echo "::endgroup::"
-      # 
+      #
       # - name: Verify Local vs Remote Tracking
         # run: |
           Compare local and remote LFS tracking
           # echo "Local Tracking:"
           # git lfs track
-          # 
+          #
           # echo "\nRemote Tracking:"
           # git ls-remote --refs origin test-pr
-          # 
+          #
           # echo "\nLFS Pointer Details:"
           # git lfs pointer --file "experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
 
@@ -190,7 +200,7 @@ jobs:
       #   with:
       #     ref: test-pr
       #     lfs: false  # Disable automatic LFS checkout
-      
+
       # - name: Manual LFS Fetch
       #   run: |
       #     git lfs install
@@ -199,7 +209,7 @@ jobs:
       #     git lfs fetch origin test-pr --all
       #     git lfs checkout
       #     git lfs pull origin test-pr
-      
+
       # - name: Verify LFS file size
       #   run: |
       #     ls -lh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
@@ -209,23 +219,23 @@ jobs:
       #   run: |
       #     echo "Git LFS Version:"
       #     git lfs version
-          
+
       #     echo "::group::Git Config"
       #     git config --list
       #     echo "::endgroup::"
-          
+
       #     echo "::group::LFS Pointer Details"
       #     git lfs pointer --file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
       #     echo "::endgroup::"
-          
+
       #     echo "::group::LFS File List"
       #     git lfs ls-files -l
       #     echo "::endgroup::"
-          
+
       #     echo "::group::Check LFS File Permissions"
       #     ls -l experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
       #     echo "::endgroup::"
-          
+
       #     echo "::group::File Content Check"
       #     file experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
       #     cat experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
