@@ -194,10 +194,9 @@ jobs:
             const removedEntries = leaderboard.filter(entry => entry.id === entryId);
 
             if (removedEntries.length === 0) {
-              const issue_number = context.issue.number;
               await github.rest.issues.createComment({
                 ...context.repo,
-                issue_number: issue_number,
+                issue_number: context.issue.number,
                 body: `No entry found with ID \`${entryId}\`.`,
               });
               return;
@@ -210,7 +209,7 @@ jobs:
             const removedEntry = JSON.stringify(removedEntries[0], null, 2);
             await github.rest.issues.createComment({
               ...context.repo,
-              issue_number: issue_number,
+              issue_number: context.issue.number,
               body: `Removed the following entry from the leaderboard:\n\`\`\`json\n${removedEntry}\n\`\`\``
             });
         env:
