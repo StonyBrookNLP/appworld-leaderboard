@@ -23,6 +23,7 @@ jobs:
           FILE_PATH=leaderboard.bundle
           curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/raw/main/${FILE_PATH}
           du -sh ${FILE_PATH}
+          cat ${FILE_PATH}
 
 #       # - name: Checkout repository
 #       #   uses: actions/checkout@v4
