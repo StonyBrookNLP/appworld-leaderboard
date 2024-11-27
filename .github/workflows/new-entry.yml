@@ -46,13 +46,13 @@ jobs:
           ref: ${{ steps.get-branch.outputs.branch }}
           lfs: true
 
-      # - name: Pull LFS files
-      #   run: |
-      #     echo "Fetching and checking out LFS files..."
-      #     git lfs install
-      #     git lfs pull
+      - name: Pull LFS files
+        run: git lfs pull
 
-      - name: Cat files
+      - name: Verify LFS files
+        run: git lfs ls-files
+
+      - name: Show LFS file size
         run: du -sh experiments/outputs/temp_test_test_challenge/leaderboard.bundle
 
       - uses: astral-sh/setup-uv@v3
