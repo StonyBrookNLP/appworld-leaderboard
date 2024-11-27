@@ -70,7 +70,7 @@ jobs:
       - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ steps.get-branch.outputs.branch }}
+          # ref: ${{ steps.get-branch.outputs.branch }}
           lfs: true
 
       - name: Show LFS file size
