@@ -54,16 +54,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout repository
+      - name: Checkout PR branch
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
-      - name: Checkout specific branch
+          ref: test-pr
+          lfs: false  # Disable automatic LFS checkout
+      
+      - name: Manual LFS Fetch
         run: |
+          git lfs install
+          git fetch origin test-pr
           git checkout test-pr
-          git lfs pull
+          git lfs fetch origin test-pr --all
           git lfs checkout
+          git lfs pull origin test-pr
+      
+      - name: Verify LFS file size
+        run: |
+          ls -lh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+          du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+
+      # - name: Checkout repository
+      #   uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: 0
+
+      # - name: Checkout specific branch
+      #   run: |
+      #     git checkout test-pr
+      #     git lfs pull
+      #     git lfs checkout
 
       # - name: Checkout PR branch
       #   uses: actions/checkout@v4
@@ -71,12 +91,12 @@ jobs:
       #     ref: test-pr
       #     lfs: true
 
-      - name: Debugging LFS
-        run: |
-          git lfs version
-          git lfs ls-files
-          git lfs status
-          du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      # - name: Debugging LFS
+      #   run: |
+      #     git lfs version
+      #     git lfs ls-files
+      #     git lfs status
+      #     du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
       # - name: Checkout PR branch
       #   uses: actions/checkout@v4
