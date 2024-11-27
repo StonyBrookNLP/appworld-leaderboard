@@ -48,8 +48,8 @@ jobs:
 
       - name: Checkout PR branch
         uses: actions/checkout@v4
-        with:
-          ref: ${{ steps.get-branch.outputs.branch }}
+        # with:
+        #   ref: ${{ steps.get-branch.outputs.branch }}
           # run: git lfs fetch --all
 
       - name: Pull LFS files
