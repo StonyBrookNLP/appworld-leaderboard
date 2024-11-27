@@ -74,7 +74,7 @@ jobs:
           lfs: true
 
       - name: Git LFS Pull 
-        run: git lfs pull
+        run: echo ${{ steps.get-branch.outputs.branch }}
 
       - name: Show LFS file size
         run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
