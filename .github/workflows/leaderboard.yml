@@ -206,19 +206,19 @@ jobs:
             // Write the updated leaderboard back to the file
             fs.writeFileSync(leaderboardPath, JSON.stringify(updatedLeaderboard, null, 2));
 
-            // Commit the changes
-            await exec('git', ['config', 'user.name', 'github-actions[bot]']);
-            await exec('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com']);
-            await exec('git', ['add', 'leaderboard.json']);
-            await exec('git', ['commit', '-m', `Remove ID ${entryId} from leaderboard`]);
-            await exec('git', ['push', '--set-upstream', 'origin', context.ref]);
+            # // Commit the changes
+            # await exec('git', ['config', 'user.name', 'github-actions[bot]']);
+            # await exec('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com']);
+            # await exec('git', ['add', 'leaderboard.json']);
+            # await exec('git', ['commit', '-m', `Remove ID ${entryId} from leaderboard`]);
+            # await exec('git', ['push', '--set-upstream', 'origin', context.ref]);
 
-            // Post a comment showing the removed entry
-            const removedEntry = JSON.stringify(removedEntries[0], null, 2);
-            await github.rest.issues.createComment({
-              ...context.repo,
-              issue_number: issue_number,
-              body: `Removed the following entry from the leaderboard:\n\`\`\`json\n${removedEntry}\n\`\`\``
-            });
+            # // Post a comment showing the removed entry
+            # const removedEntry = JSON.stringify(removedEntries[0], null, 2);
+            # await github.rest.issues.createComment({
+            #   ...context.repo,
+            #   issue_number: issue_number,
+            #   body: `Removed the following entry from the leaderboard:\n\`\`\`json\n${removedEntry}\n\`\`\``
+            # });
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
