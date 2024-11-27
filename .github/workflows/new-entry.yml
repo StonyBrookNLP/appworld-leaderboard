@@ -123,7 +123,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const entries = JSON.parse(fs.readFileSync('leaderboard.json', 'utf8'));
+            const entries = JSON.parse(fs.readFileSync('experiments/outputs/_leaderboard.json', 'utf8'));
             const formattedEntry = '```json\n' + JSON.stringify(entries[entries.length - 1], null, 4) + '\n```';
             const commentBody = `### Latest Leaderboard Entry\n${formattedEntry}`;
             const issue_number = context.issue.number;
@@ -137,7 +137,7 @@ jobs:
         run: |
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add leaderboard.json
+            git add experiments/outputs/_leaderboard.json
             git commit -m "add leaderboard entry"
             git push origin ${{ steps.get-branch.outputs.branch }}
         env:
