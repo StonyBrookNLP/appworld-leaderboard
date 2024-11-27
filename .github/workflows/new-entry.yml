@@ -46,22 +46,42 @@ jobs:
       #     ref: ${{ steps.get-branch.outputs.branch }}
       #     lfs: true
 
-      - name: Checkout PR branch
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-        # with:
-        #   ref: ${{ steps.get-branch.outputs.branch }}
-          # run: git lfs fetch --all
+      # - name: Checkout PR branch
+      #   uses: actions/checkout@v2
+      #   with:
+      #     lfs: true
+      #   # with:
+      #   #   ref: ${{ steps.get-branch.outputs.branch }}
+      #     # run: git lfs fetch --all
 
-      - name: Pull LFS files
-        run: |
-          git lfs fetch --all
-          git lfs pull
-          git lfs checkout
+      # - name: Pull LFS files
+      #   run: |
+      #     git lfs fetch --all
+      #     git lfs pull
+      #     git lfs checkout
 
-      - name: Checkout LFS objects
-        run: git lfs checkout experiments/outputs/full_code_refl_deepseekcoder_test_challenge/leaderboard.bundle
+      # - name: Checkout LFS objects
+      #   run: git lfs checkout experiments/outputs/full_code_refl_deepseekcoder_test_challenge/leaderboard.bundle
+
+
+
+
+    - name: checkout engine without LFS
+      uses: actions/checkout@v2
+      with:
+        lfs: false
+    - name: apply_lfs_filters
+      run: |
+        git config --local lfs.fetchexclude '**/Windows/**'
+    - name: checkout engine with LFS
+      uses: actions/checkout@v2
+      with:
+        lfs: true
+    - name: Show LFS
+      run: git lfs pull
+
+
+
 
       # - name: Check out LFS objects
       #   run: git lfs checkout experiments/outputs/full_code_refl_deepseekcoder_test_challenge/leaderboard.bundle
