@@ -1,64 +1,67 @@
-name: New leaderboard entry
-
-on:
-  issue_comment:
-    types: [created]
-
-jobs:
-  add-new-entry:
-    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/add-to-leaderboard') }}
-    runs-on: ubuntu-latest
-    steps:
-      # - name: Install LFS
-      #   run: git lfs install
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-          # fetch-depth: 0
-
-      # - name: Pull and checkout LFS content
-      #   run: |
-      #     git lfs fetch
-      #     git lfs checkout
-
-      - name: Show LFS file size
-        run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # name: New leaderboard entry
 
 # on:
 #   issue_comment:
 #     types: [created]
-#     branches:
-#       - main
 
 # jobs:
 #   add-new-entry:
 #     if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/add-to-leaderboard') }}
 #     runs-on: ubuntu-latest
 #     steps:
+#       # - name: Install LFS
+#       #   run: git lfs install
+
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+#         with:
+#           lfs: true
+
+#       - name: Show LFS file size
+#         run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+name: New leaderboard entry
+
+on:
+  issue_comment:
+    types: [created]
+    branches:
+      - main
+
+jobs:
+  add-new-entry:
+    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/add-to-leaderboard') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      - name: Show LFS file size
+        run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+
+
 #       # - name: Extract arguments from comment
 #       #   id: extract_args
 #       #   run: |
