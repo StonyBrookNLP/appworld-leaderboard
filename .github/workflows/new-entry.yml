@@ -59,10 +59,10 @@ jobs:
           git lfs checkout
 
       - name: Check out LFS objects
-        run: git lfs checkout experiments/outputs/temp_test_test_challenge/leaderboard.bundle
+        run: git lfs checkout experiments/outputs/full_code_refl_deepseekcoder_test_challenge/leaderboard.bundle
 
       - name: Show LFS
-        run: du -sh experiments/outputs/temp_test_test_challenge/leaderboard.bundle
+        run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_challenge/leaderboard.bundle
 
       - uses: astral-sh/setup-uv@v3
         with:
