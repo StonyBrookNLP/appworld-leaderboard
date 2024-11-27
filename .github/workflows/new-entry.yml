@@ -13,6 +13,8 @@ jobs:
     steps:
 
       - name: Debug LFS Configuration
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           FILE_PATH="experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle"
           # Direct download using GitHub CLI
