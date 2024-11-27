@@ -59,22 +59,35 @@ jobs:
         with:
           ref: test-pr
           lfs: true
-          fetch-depth: 0
 
-      - name: Fetch LFS objects
-        run: git lfs pull
-
-      - name: Show LFS file size
-        run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
-
-      - name: Fetch LFS objects
+      - name: Debugging LFS
         run: |
-          git lfs install
-          git lfs fetch origin test-pr
-          git lfs checkout
+          git lfs version
+          git lfs ls-files
+          git lfs status
+          du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
-      - name: Show LFS file size
-        run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+      # - name: Checkout PR branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: test-pr
+      #     lfs: true
+      #     fetch-depth: 0
+
+      # - name: Fetch LFS objects
+      #   run: git lfs pull
+
+      # - name: Show LFS file size
+      #   run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
+
+      # - name: Fetch LFS objects
+      #   run: |
+      #     git lfs install
+      #     git lfs fetch origin test-pr
+      #     git lfs checkout
+
+      # - name: Show LFS file size
+      #   run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
 
       # - name: Checkout code
       #   uses: actions/checkout@v2
