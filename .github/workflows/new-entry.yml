@@ -58,16 +58,16 @@ jobs:
         id: get-branch
         run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
 
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-
-      # - name: Checkout PR branch
-      #   uses: actions/checkout@v4
+      # - name: Checkout code
+      #   uses: actions/checkout@v2
       #   with:
-      #     ref: ${{ steps.get-branch.outputs.branch }}
       #     lfs: true
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.get-branch.outputs.branch }}
+          lfs: true
 
       - name: Show LFS file size
         run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_normal/leaderboard.bundle
