@@ -132,3 +132,10 @@ jobs:
               issue_number: issue_number,
               body: commentBody,
             });
+
+      - name: Add leaderboard entry
+        run: |
+            git add leaderboard.json
+            git commit -m "add leaderboard entry"
+            git fetch origin ${{ steps.get-branch.outputs.branch }}
+            git push origin ${{ steps.get-branch.outputs.branch }}
