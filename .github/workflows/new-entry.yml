@@ -18,10 +18,10 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - name: Pull and checkout LFS content
-        run: |
-          git lfs fetch
-          git lfs checkout
+      # - name: Pull and checkout LFS content
+      #   run: |
+      #     git lfs fetch
+      #     git lfs checkout
 
       - name: Show LFS file size
         run: du -sh experiments/outputs/full_code_refl_deepseekcoder_test_challenge/leaderboard.bundle
