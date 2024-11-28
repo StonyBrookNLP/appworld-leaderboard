@@ -194,12 +194,7 @@ jobs:
             const removedEntries = leaderboard.filter(entry => entry.id === entryId);
 
             if (removedEntries.length === 0) {
-              await github.rest.issues.createComment({
-                ...context.repo,
-                issue_number: context.issue.number,
-                body: `No entry found with ID \`${entryId}\`.`,
-              });
-              return;
+              throw new Error(`No entry found with ID \`${entryId}\`.`);
             }
 
             // Write the updated leaderboard back to the file
