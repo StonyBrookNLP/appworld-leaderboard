@@ -63,32 +63,32 @@ jobs:
       - name: Fetch main branch
         run: git fetch origin main
 
-      # - name: Verify PR file changes
-      #   run: |
-      #       echo "Checking PR for exactly two new files..."
-      #       experiment_prefix="${{ env.experiment_prefix }}"
-      #       expected_files=("experiments/outputs/${experiment_prefix}_test_challenge/leaderboard.bundle" "experiments/outputs/${experiment_prefix}_test_normal/leaderboard.bundle")
-      #       new_files=$(git diff --name-only origin/main..HEAD)
+      - name: Verify PR file changes
+        run: |
+            echo "Checking PR for exactly two new files..."
+            experiment_prefix="${{ env.experiment_prefix }}"
+            expected_files=("experiments/outputs/${experiment_prefix}_test_challenge/leaderboard.bundle" "experiments/outputs/${experiment_prefix}_test_normal/leaderboard.bundle")
+            new_files=$(git diff --name-only origin/main..HEAD)
 
-      #       echo "Expected files:"
-      #       printf "%s\n" "${expected_files[@]}"
-      #       echo "New files in the PR:"
-      #       echo "$new_files"
+            echo "Expected files:"
+            printf "%s\n" "${expected_files[@]}"
+            echo "New files in the PR:"
+            echo "$new_files"
 
-      #       # Sort and compare file lists
-      #       expected_sorted=$(printf "%s\n" "${expected_files[@]}")
-      #       actual_sorted=$(echo "$new_files" | sort)
+            # Sort and compare file lists
+            expected_sorted=$(printf "%s\n" "${expected_files[@]}")
+            actual_sorted=$(echo "$new_files" | sort)
 
-      #       if [[ "$expected_sorted" != "$actual_sorted" ]]; then
-      #         echo "Error: File list does not match the expected files."
-      #         echo "Expected:"
-      #         echo "$expected_sorted"
-      #         echo "Actual:"
-      #         echo "$actual_sorted"
-      #         exit 1
-      #       fi
+            if [[ "$expected_sorted" != "$actual_sorted" ]]; then
+              echo "Error: File list does not match the expected files."
+              echo "Expected:"
+              echo "$expected_sorted"
+              echo "Actual:"
+              echo "$actual_sorted"
+              exit 1
+            fi
 
-      #       echo "PR file check passed. The file list matches exactly."
+            echo "PR file check passed. The file list matches exactly."
 
       - name: Download relevant files
         run: |
