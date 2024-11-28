@@ -216,6 +216,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Reformat leaderboard in the original format
+        run: |
+          python - <<EOF
+          import json
+
+          with open("experiments/outputs/_leaderboard.json") as file:
+            data = json.load(file)
+
+          def normalize_numbers(obj):
+            if isinstance(obj, float) and obj.is_integer():
+                return int(obj)  # Convert float to int
+            elif isinstance(obj, dict):
+                return {k: normalize_numbers(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [normalize_numbers(v) for v in obj]
+            return obj
+
+          with open("experiments/outputs/_leaderboard.json", "w") as file:
+            json.dump(normalize_numbers(data), indent=4)
+          EOF
+
       - name: Commit and push
         run: |
             git config user.name "github-actions[bot]"
