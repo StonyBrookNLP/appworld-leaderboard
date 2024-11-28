@@ -174,8 +174,8 @@ jobs:
           echo "Checking if Entry ID is in the diff..."
           git fetch origin main
           diff_content=$(git diff origin/main..HEAD experiments/outputs/_leaderboard.json)
-          cat diff_content
           echo "$diff_content" > diff_content.txt
+          cat diff_content.txt
           if echo "$diff_content" | grep -q "$entry_id"; then
             echo "Entry ID found in diff."
           else
