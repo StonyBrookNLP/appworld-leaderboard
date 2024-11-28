@@ -202,11 +202,25 @@ jobs:
               return;
             }
 
+            // Helper function to normalize numbers as Python does
+            function normalizeNumbers(obj) {
+                if (typeof obj === 'number') {
+                    return Number.isInteger(obj) ? obj : obj;
+                } else if (Array.isArray(obj)) {
+                    return obj.map(normalizeNumbers);
+                } else if (typeof obj === 'object' && obj !== null) {
+                    return Object.fromEntries(
+                        Object.entries(obj).map(([key, value]) => [key, normalizeNumbers(value)])
+                    );
+                }
+                return obj;
+            }
+
             // Write the updated leaderboard back to the file
-            fs.writeFileSync(leaderboardPath, JSON.stringify(updatedLeaderboard, null, 4));
+            fs.writeFileSync(leaderboardPath, JSON.stringify(normalizeNumbers(updatedLeaderboard), null, 4));
 
             // Post a comment showing the removed entry
-            const removedEntry = JSON.stringify(removedEntries[0], null, 2);
+            const removedEntry = JSON.stringify(normalizeNumbers(removedEntries[0]), null, 4);
             await github.rest.issues.createComment({
               ...context.repo,
               issue_number: context.issue.number,
