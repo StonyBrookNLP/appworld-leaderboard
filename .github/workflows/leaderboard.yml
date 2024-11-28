@@ -33,17 +33,14 @@ jobs:
           python_version=$(echo "$comment" | grep -oP '(?<=--python )\S+')
           appworld_version=$(echo "$comment" | grep -oP '(?<=--appworld )\S+')
           experiment_prefix=$(echo "$comment" | grep -oP '(?<=--experiment-prefix )\S+')
-          replace_last_flag=$(echo "$comment" | grep -q -- '--replace-last' && echo "--replace-last" || echo "")
 
           echo "Python version: $python_version"
           echo "Appworld version: $appworld_version"
           echo "Experiment names: ${{ env.experiment_prefix }}_test_normal and ${{ env.experiment_prefix }}_test_challenge"
-          echo "Replace last flag: $replace_last_flag"
 
           echo "python_version=$python_version" >> $GITHUB_ENV
           echo "appworld_version=$appworld_version" >> $GITHUB_ENV
           echo "experiment_prefix=$experiment_prefix" >> $GITHUB_ENV
-          echo "replace_last_flag=$replace_last_flag" >> $GITHUB_ENV
 
       - uses: astral-sh/setup-uv@v3
         with:
@@ -115,7 +112,7 @@ jobs:
           uv run appworld evaluate ${{ env.experiment_prefix }}_test_challenge test_challenge
 
       - name: Make and add leaderboard entry
-        run: uv run appworld make ${{ env.experiment_prefix }}_test_normal ${{ env.experiment_prefix }}_test_challenge ${{env.replace_last_flag}} --save
+        run: uv run appworld make ${{ env.experiment_prefix }}_test_normal ${{ env.experiment_prefix }}_test_challenge --save
 
       - name: Comment with leaderboard entry
         if: ${{ success() }}
