@@ -225,8 +225,8 @@ jobs:
             data = json.load(file)
 
           def normalize_numbers(obj):
-            if isinstance(obj, float) and obj.is_integer():
-                return int(obj)  # Convert float to int
+            if isinstance(obj, int):
+                return float(obj)
             elif isinstance(obj, dict):
                 return {k: normalize_numbers(v) for k, v in obj.items()}
             elif isinstance(obj, list):
