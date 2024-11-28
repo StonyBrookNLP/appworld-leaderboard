@@ -125,7 +125,7 @@ jobs:
             const fs = require('fs');
             const entries = JSON.parse(fs.readFileSync('experiments/outputs/_leaderboard.json', 'utf8'));
             const formattedEntry = '```json\n' + JSON.stringify(entries[entries.length - 1], null, 4) + '\n```';
-            const commentBody = `### Latest Leaderboard Entry\n${formattedEntry}`;
+            const commentBody = `### Added leaderboard entry\n${formattedEntry}`;
             const issue_number = context.issue.number;
             await github.rest.issues.createComment({
               ...context.repo,
@@ -165,7 +165,7 @@ jobs:
         run: |
           echo "Extracting arguments..."
           comment="${{ github.event.comment.body }}"
-          entry_id=$(echo "$comment" | grep -oP '(?<=--entry-id )\S+')
+          entry_id=$(echo "$comment" | grep -oP '(?<=--id )\S+')
           echo "Entry ID: $entry_id"
           echo "entry_id=$entry_id" >> $GITHUB_ENV
 
@@ -202,39 +202,47 @@ jobs:
               return;
             }
 
-            // Helper function to normalize numbers as Python does
-            function normalizeNumbers(obj) {
-                if (typeof obj === 'number') {
-                    return Number.isInteger(obj) ? obj : obj;
-                } else if (Array.isArray(obj)) {
-                    return obj.map(normalizeNumbers);
-                } else if (typeof obj === 'object' && obj !== null) {
-                    return Object.fromEntries(
-                        Object.entries(obj).map(([key, value]) => [key, normalizeNumbers(value)])
-                    );
-                }
-                return obj;
-            }
-
             // Write the updated leaderboard back to the file
-            fs.writeFileSync(leaderboardPath, JSON.stringify(normalizeNumbers(updatedLeaderboard), null, 4));
+            fs.writeFileSync(leaderboardPath, JSON.stringify(updatedLeaderboard, null, 4));
 
             // Post a comment showing the removed entry
-            const removedEntry = JSON.stringify(normalizeNumbers(removedEntries[0]), null, 4);
+            const removedEntry = JSON.stringify(removedEntries[0], null, 4);
+            const commentBody = `### Removed leaderboard entry\n${removedEntry}`;
             await github.rest.issues.createComment({
               ...context.repo,
               issue_number: context.issue.number,
-              body: `Removed the following entry from the leaderboard:\n\`\`\`json\n${removedEntry}\n\`\`\``
+              body: commentBody
             });
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Reformat leaderboard in the original format
+        run: |
+          python - <<EOF
+          import json
+
+          with open("experiments/outputs/_leaderboard.json") as file:
+            data = json.load(file)
+
+          def normalize_numbers(obj):
+            if isinstance(obj, float) and obj.is_integer():
+                return int(obj)  # Convert float to int
+            elif isinstance(obj, dict):
+                return {k: normalize_numbers(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [normalize_numbers(v) for v in obj]
+            return obj
+
+          with open("experiments/outputs/_leaderboard.json", "w") as file:
+            json.dump(normalize_numbers(data), indent=4)
+          EOF
 
       - name: Commit and push
         run: |
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add -f experiments/outputs/_leaderboard.json
-            git commit -m "add leaderboard entry"
+            git commit -m "remove leaderboard entry"
             git push origin ${{ steps.get-branch.outputs.branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
