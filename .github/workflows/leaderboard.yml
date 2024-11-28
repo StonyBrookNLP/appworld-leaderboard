@@ -206,7 +206,7 @@ jobs:
             fs.writeFileSync(leaderboardPath, JSON.stringify(updatedLeaderboard, null, 4));
 
             // Post a comment showing the removed entry
-            const removedEntry = JSON.stringify(removedEntries[0], null, 4);
+            const removedEntry = '```json\n' + JSON.stringify(removedEntries[0], null, 4); + '\n```';
             const commentBody = `### Removed leaderboard entry\n${removedEntry}`;
             await github.rest.issues.createComment({
               ...context.repo,
@@ -234,7 +234,7 @@ jobs:
             return obj
 
           with open("experiments/outputs/_leaderboard.json", "w") as file:
-            json.dump(normalize_numbers(data), indent=4)
+            json.dump(normalize_numbers(data), file, indent=4)
           EOF
 
       - name: Commit and push
