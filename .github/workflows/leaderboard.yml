@@ -169,6 +169,19 @@ jobs:
           echo "Entry ID: $entry_id"
           echo "entry_id=$entry_id" >> $GITHUB_ENV
 
+      - name: Check if this entry ID was added in this PR
+        run: |
+          echo "Checking if Entry ID is in the diff..."
+          git fetch origin main
+          diff_content=$(git diff origin/main..HEAD experiments/outputs/_leaderboard.json)
+          echo "$diff_content" > diff_content.txt
+          if echo "$diff_content" | grep -q "$entry_id"; then
+            echo "Entry ID found in diff."
+          else
+            echo "Error: Entry ID not found in diff."
+            exit 1
+          fi
+
       - name: Remove leaderboard entry and comment
         if: env.entry_id
         uses: actions/github-script@v6
