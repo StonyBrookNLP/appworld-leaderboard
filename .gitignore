@@ -2,9 +2,11 @@
 # Ignore everything
 *
 
-# Except README.md, leaderboard.json, .gitignore and .github
+# Except README.md, leaderboard.json, scripts, .gitignore and .github
 !README.md
 !leaderboard.json
+!scripts/
+!scripts/*
 !.gitignore
 !.github/
 !.github/workflows/
