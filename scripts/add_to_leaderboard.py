@@ -43,7 +43,7 @@ def validate_diff(experiment_prefixes: list[str]) -> None:
         raise Exception("The PR does not allow changes or removal to existing files.")
     expected_added_file_paths = [
         os.path.join(
-            "experiments", "outputs", f"{prefix}_{set_name}", "leaderboard.json"
+            "experiments", "outputs", f"{prefix}_{set_name}", "leaderboard.bundle"
         )
         for prefix in experiment_prefixes
         for set_name in ["test_normal", "test_challenge"]
