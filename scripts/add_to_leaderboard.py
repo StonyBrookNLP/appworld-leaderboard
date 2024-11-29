@@ -11,6 +11,7 @@ def print_rule(title: str = "") -> None:
 
 
 def run_command(command: str) -> None:
+    print()
     print_rule()
     print(command)
     print_rule()
@@ -53,18 +54,25 @@ def main():
         action="store_true",
         help="unpack experiment bundles before evaluation.",
     )
+    parser.add_argument("--pr-branch", type=str)
     parser.add_argument(
         "--use-uv", action="store_true", help="prefix the python commands with uv run."
     )
     args = parser.parse_args()
     uv_prefix = "uv run " if args.use_uv else ""
+
+    validate_diff(args.experiment_prefixes)
+
     for experiment_prefix in args.experiment_prefixes:
         print_rule(f"\nWorking on experiment prefix: {experiment_prefix}")
-        experiment_names = [
-            experiment_prefix + "_test_normal",
-            experiment_prefix + "_test_challenge",
-        ]
+        experiment_names = [experiment_prefix + "_test_normal", experiment_prefix + "_test_challenge"]
         for experiment_name in experiment_names:
+            # maybe download leaderboard bundle
+            if args.pr_branch:
+                remote_file_path = f"experiments/outputs/{experiment_name}/leaderboard.bundle"
+                local_file_path = os.sep.join(remote_file_path.split("/"))
+                command = f"curl -L -o {local_file_path} https://github.com/stonybrooknlp/appworld-leaderboard/raw/{args.pr_branch}/{remote_file_path}"
+                run_command(command)
             # test_normal:
             run_command(
                 f"{uv_prefix}appworld unpack {experiment_name}_test_normal",
