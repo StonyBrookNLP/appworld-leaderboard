@@ -45,60 +45,36 @@ def main():
         "experiment-prefixes", nargs="+", type=str, help="experiment prefixes"
     )
     parser.add_argument(
-        "--validate-diff",
-        action="store_true",
-        help="validate the diff to ensure only expected new files are added.",
-    )
-    parser.add_argument(
-        "--unpack-first",
-        action="store_true",
-        help="unpack experiment bundles before evaluation.",
-    )
-    parser.add_argument("--pr-branch", type=str)
-    parser.add_argument(
-        "--use-uv", action="store_true", help="prefix the python commands with uv run."
+        "--pr-branch",
+        type=str,
+        default="",
+        help="If this is run from a github action PR workflow, pass this. Otherwise, leave it empty.",
     )
     args = parser.parse_args()
-    uv_prefix = "uv run " if args.use_uv else ""
-
-    validate_diff(args.experiment_prefixes)
+    uv_prefix = "uv run " if args.pr_branch else ""
+    if args.pr_branch:
+        validate_diff(args.experiment_prefixes)
 
     for experiment_prefix in args.experiment_prefixes:
         print_rule(f"\nWorking on experiment prefix: {experiment_prefix}")
         experiment_names = [experiment_prefix + "_test_normal", experiment_prefix + "_test_challenge"]
-        for experiment_name in experiment_names:
+        dataset_names = ["test_normal", "test_challenge"]
+        for experiment_name, dataset_name in zip(experiment_names, dataset_names):
             # maybe download leaderboard bundle
             if args.pr_branch:
                 remote_file_path = f"experiments/outputs/{experiment_name}/leaderboard.bundle"
                 local_file_path = os.sep.join(remote_file_path.split("/"))
                 command = f"curl -L -o {local_file_path} https://github.com/stonybrooknlp/appworld-leaderboard/raw/{args.pr_branch}/{remote_file_path}"
                 run_command(command)
-            # test_normal:
+            if args.pr_branch:
+                run_command(
+                    f"{uv_prefix}appworld unpack {experiment_name}_{dataset_name}", check=True, shell=True
+                )
+                run_command(
+                    f"{uv_prefix}appworld evaluate {experiment_name}_{dataset_name} {dataset_name}", check=True, shell=True,
+                )
             run_command(
-                f"{uv_prefix}appworld unpack {experiment_name}_test_normal",
-                check=True,
-                shell=True,
-            )
-            run_command(
-                f"{uv_prefix}appworld evaluate {experiment_name}_test_normal test_normal",
-                check=True,
-                shell=True,
-            )
-            # test_challenge:
-            run_command(
-                f"{uv_prefix}appworld unpack {experiment_name}_test_challenge",
-                check=True,
-                shell=True,
-            )
-            run_command(
-                f"{uv_prefix}appworld evaluate {experiment_name}_test_challenge test_challenge",
-                check=True,
-                shell=True,
-            )
-            run_command(
-                f"{uv_prefix}appworld make {experiment_name}_test_normal {experiment_name}_challenge --save",
-                check=True,
-                shell=True,
+                f"{uv_prefix}appworld make {experiment_name}_{dataset_name} {dataset_name} --save", check=True, shell=True,
             )
 
 
