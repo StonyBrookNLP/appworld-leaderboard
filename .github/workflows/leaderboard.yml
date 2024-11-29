@@ -63,6 +63,12 @@ jobs:
       - name: Fetch main branch
         run: git fetch origin main
 
+      - name: Check ls
+        run: ls
+
+      - name: Check pwd
+        run: pwd
+
       - name: Add leaderboard entry
         run: python scripts/add_to_leaderboard.py --pr-branch ${{ steps.get-branch.outputs.branch }} --experiment-prefixes ${{ env.experiment_prefixes }}
 
