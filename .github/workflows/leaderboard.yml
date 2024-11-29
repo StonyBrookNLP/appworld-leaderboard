@@ -122,15 +122,10 @@ jobs:
           version: "0.4.4"
 
       - name: Set up Python
-        run: uv python install ${{ env.python_version }}
+        run: uv python install 3.11
 
       - name: Install venv
         run: uv venv
-
-      - name: Install dependencies
-        run: |
-          uv pip install appworld==${{ env.appworld_version }}
-          uv run appworld install
 
       - name: Remove leaderboard entries
         run: PYTHONPATH=$PYTHONPATH:. uv run scripts/remove_from_leaderboard.py --save-removed --ids ${{ env.ids }}
