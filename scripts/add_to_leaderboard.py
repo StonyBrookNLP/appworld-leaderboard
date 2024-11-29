@@ -2,14 +2,20 @@ import argparse
 import os
 import subprocess
 
-from rich import print as rprint
-from rich.rule import Rule
-
 from scripts.lib import read_json, write_json
 
 
 def print_rule(title: str = "") -> None:
-    rprint(Rule(title=title))
+    line = "-" * 40
+    if title:
+        title_line = f" {title} "
+        center_position = (len(line) - len(title_line)) // 2
+        line = (
+            line[:center_position]
+            + title_line
+            + line[center_position + len(title_line) :]
+        )
+    print(line)
 
 
 def run_command(command: str) -> None:
