@@ -32,15 +32,15 @@ jobs:
           comment="${{ github.event.comment.body }}"
           python_version=$(echo "$comment" | grep -oP '(?<=--python )\S+')
           appworld_version=$(echo "$comment" | grep -oP '(?<=--appworld )\S+')
-          experiment_prefix=$(echo "$comment" | grep -oP '(?<=--experiment-prefix )\S+')
+          experiment_prefixes=$(echo "$command" | cut -d' ' -f6-)
 
           echo "Python version: $python_version"
           echo "Appworld version: $appworld_version"
-          echo "Experiment names: ${{ env.experiment_prefix }}_test_normal and ${{ env.experiment_prefix }}_test_challenge"
+          echo "Experiment prefixes: $experiment_prefixes"
 
           echo "python_version=$python_version" >> $GITHUB_ENV
           echo "appworld_version=$appworld_version" >> $GITHUB_ENV
-          echo "experiment_prefix=$experiment_prefix" >> $GITHUB_ENV
+          echo "experiment_prefixes=$experiment_prefixes" >> $GITHUB_ENV
 
       - uses: astral-sh/setup-uv@v3
         with:
@@ -63,56 +63,8 @@ jobs:
       - name: Fetch main branch
         run: git fetch origin main
 
-      - name: Verify PR file changes
-        run: |
-            echo "Checking PR for exactly two new files..."
-            experiment_prefix="${{ env.experiment_prefix }}"
-            expected_files=("experiments/outputs/${experiment_prefix}_test_challenge/leaderboard.bundle" "experiments/outputs/${experiment_prefix}_test_normal/leaderboard.bundle")
-            new_files=$(git diff --name-only origin/main..HEAD)
-
-            echo "Expected files:"
-            printf "%s\n" "${expected_files[@]}"
-            echo "New files in the PR:"
-            echo "$new_files"
-
-            # Sort and compare file lists
-            expected_sorted=$(printf "%s\n" "${expected_files[@]}")
-            actual_sorted=$(echo "$new_files" | sort)
-
-            if [[ "$expected_sorted" != "$actual_sorted" ]]; then
-              echo "Error: File list does not match the expected files."
-              echo "Expected:"
-              echo "$expected_sorted"
-              echo "Actual:"
-              echo "$actual_sorted"
-              exit 1
-            fi
-
-            echo "PR file check passed. The file list matches exactly."
-
-      - name: Download relevant files
-        run: |
-          FILE_PATH=experiments/outputs/${experiment_prefix}_test_normal/leaderboard.bundle
-          curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/raw/${{ steps.get-branch.outputs.branch }}/${FILE_PATH}
-          du -sh ${FILE_PATH}
-          FILE_PATH=experiments/outputs/${experiment_prefix}_test_challenge/leaderboard.bundle
-          curl -L -o ${FILE_PATH} https://github.com/stonybrooknlp/appworld-leaderboard/raw/${{ steps.get-branch.outputs.branch }}/${FILE_PATH}
-          du -sh ${FILE_PATH}
-
-      - name: Unpack experiments
-        run: |
-          uv run appworld unpack ${{ env.experiment_prefix }}_test_normal
-          uv run appworld unpack ${{ env.experiment_prefix }}_test_challenge
-          ls experiments/outputs/temp_test_test_normal/
-          ls experiments/outputs/temp_test_test_challenge/
-
-      - name: Run evaluations
-        run: |
-          uv run appworld evaluate ${{ env.experiment_prefix }}_test_normal test_normal
-          uv run appworld evaluate ${{ env.experiment_prefix }}_test_challenge test_challenge
-
-      - name: Make and add leaderboard entry
-        run: uv run appworld make ${{ env.experiment_prefix }}_test_normal ${{ env.experiment_prefix }}_test_challenge --save
+      - name: Add leaderboard entry
+        run: python scripts/add_to_leaderboard.py --pr-branch ${{ steps.get-branch.outputs.branch }} --experiment-prefixes ${{ env.experiment_prefixes }}
 
       - name: Comment with leaderboard entry
         if: ${{ success() }}
@@ -130,7 +82,7 @@ jobs:
               body: commentBody,
             });
 
-      - name: Add leaderboard entry
+      - name: Commit and push
         run: |
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -162,65 +114,12 @@ jobs:
         run: |
           echo "Extracting arguments..."
           comment="${{ github.event.comment.body }}"
-          entry_id=$(echo "$comment" | grep -oP '(?<=--id )\S+')
-          echo "Entry ID: $entry_id"
-          echo "entry_id=$entry_id" >> $GITHUB_ENV
+          ids="${comment#* }"
+          echo "Entry IDs: $ids"
+          echo "ids=$ids" >> $GITHUB_ENV
 
-      - name: Check if this entry ID was added in this PR
-        run: |
-          echo "Checking if Entry ID is in the diff..."
-          git fetch origin main
-          diff_content=$(git diff origin/main..HEAD experiments/outputs/_leaderboard.json)
-          echo "$diff_content" > diff_content.txt
-          cat diff_content.txt
-          if echo "$diff_content" | grep -q "$entry_id"; then
-            echo "Entry ID found in diff."
-          else
-            echo "Error: Entry ID not found in diff."
-            exit 1
-          fi
-
-      - name: Remove leaderboard entry and comment
-        if: env.entry_id
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const path = require('path');
-
-            const entryId = process.env.entry_id;
-            const repoOwner = context.repo.owner;
-            const repoName = context.repo.repo;
-            const prNumber = context.payload.issue.number;
-
-            const leaderboardPath = path.join(process.cwd(), 'experiments/outputs/_leaderboard.json');
-
-            // Load leaderboard.json
-            if (!fs.existsSync(leaderboardPath)) {
-              throw new Error('experiments/outputs/_leaderboard.json not found in the repository root.');
-            }
-
-            const leaderboard = JSON.parse(fs.readFileSync(leaderboardPath, 'utf8'));
-            const updatedLeaderboard = leaderboard.filter(entry => entry.id !== entryId);
-            const removedEntries = leaderboard.filter(entry => entry.id === entryId);
-
-            if (removedEntries.length === 0) {
-              throw new Error(`No entry found with ID \`${entryId}\`.`);
-            }
-
-            // Write the updated leaderboard back to the file
-            fs.writeFileSync(leaderboardPath, JSON.stringify(updatedLeaderboard, null, 4));
-
-            // Post a comment showing the removed entry
-            const removedEntry = '```json\n' + JSON.stringify(removedEntries[0], null, 4); + '\n```';
-            const commentBody = `### Removed leaderboard entry\n${removedEntry}`;
-            await github.rest.issues.createComment({
-              ...context.repo,
-              issue_number: context.issue.number,
-              body: commentBody
-            });
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Remove leaderboard entries
+        run: python scripts/remove_from_leaderboard.py --save-removed --ids ${{ env.ids }}
 
       - name: Reformat leaderboard in the original format
         run: |
