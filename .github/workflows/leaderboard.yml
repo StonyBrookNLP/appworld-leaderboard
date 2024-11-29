@@ -78,9 +78,8 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const entries = JSON.parse(fs.readFileSync('experiments/outputs/_leaderboard.json', 'utf8'));
-            const formattedEntry = '```json\n' + JSON.stringify(entries[entries.length - 1], null, 4) + '\n```';
-            const commentBody = `### Added leaderboard entry\n${formattedEntry}`;
+            const content = fs.readFileSync('.temp/added_leaderboard_data.json', 'utf8');
+            const commentBody = `### Added leaderboard entry\n${content}`;
             const issue_number = context.issue.number;
             await github.rest.issues.createComment({
               ...context.repo,
