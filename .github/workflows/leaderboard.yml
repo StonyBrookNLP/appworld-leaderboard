@@ -75,7 +75,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const content = fs.readFileSync('.temp/added_leaderboard_data.json', 'utf8');
+            const content = '```json\n' + fs.readFileSync('.temp/added_leaderboard_data.json', 'utf8') + '\n```';
             const commentBody = `### Added to leaderboard:\n${content}`;
             const issue_number = context.issue.number;
             await github.rest.issues.createComment({
