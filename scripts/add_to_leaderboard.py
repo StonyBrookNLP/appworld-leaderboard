@@ -33,6 +33,11 @@ def validate_diff(experiment_prefixes: list[str]) -> None:
         text=True,
     )
     added_file_paths = output.stdout.strip().splitlines()
+    added_file_paths = [
+        file_path
+        for file_path in added_file_paths
+        if file_path == os.path.join("experiments", "outputs", "_leaderboard.json")
+    ]
     output = subprocess.run(
         ["git", "diff", "origin/main", "--diff-filter=MD", "--name-only"],
         capture_output=True,
