@@ -32,7 +32,7 @@ jobs:
           comment="${{ github.event.comment.body }}"
           python_version=$(echo "$comment" | grep -oP '(?<=--python )\S+')
           appworld_version=$(echo "$comment" | grep -oP '(?<=--appworld )\S+')
-          experiment_prefixes=$(echo "$command" | cut -d' ' -f6-)
+          experiment_prefixes=$(echo "$comment" | cut -d' ' -f6-)
 
           echo "Python version: $python_version"
           echo "Appworld version: $appworld_version"
