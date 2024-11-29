@@ -70,7 +70,7 @@ jobs:
         run: pwd
 
       - name: Add leaderboard entry
-        run: uv run scripts/add_to_leaderboard.py --pr-branch ${{ steps.get-branch.outputs.branch }} --experiment-prefixes ${{ env.experiment_prefixes }}
+        run: PYTHONPATH=$PYTHONPATH:. uv run scripts/add_to_leaderboard.py --pr-branch ${{ steps.get-branch.outputs.branch }} --experiment-prefixes ${{ env.experiment_prefixes }}
 
       - name: Comment with leaderboard entry
         if: ${{ success() }}
@@ -125,7 +125,7 @@ jobs:
           echo "ids=$ids" >> $GITHUB_ENV
 
       - name: Remove leaderboard entries
-        run: uv run scripts/remove_from_leaderboard.py --save-removed --ids ${{ env.ids }}
+        run: PYTHONPATH=$PYTHONPATH:. uv run scripts/remove_from_leaderboard.py --save-removed --ids ${{ env.ids }}
 
       - name: Reformat leaderboard in the original format
         run: |
