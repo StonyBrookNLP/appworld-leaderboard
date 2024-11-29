@@ -1,4 +1,5 @@
 import argparse
+import os
 import subprocess
 
 from rich import print as rprint
@@ -16,10 +17,36 @@ def run_command(command: str) -> None:
     subprocess.run(command, check=True, shell=True)
 
 
+def validate_diff(experiment_prefixes: list[str]) -> None:
+    output = subprocess.run(["git", "diff", "origin/main", "--diff-filter=A", "--name-only"], capture_output=True, text=True)
+    added_file_paths = output.stdout.strip().splitlines()
+    output = subprocess.run(["git", "diff", "origin/main", "--diff-filter=MD", "--name-only"], capture_output=True, text=True)
+    changed_or_removed_file_paths = output.stdout.strip().splitlines()
+    if changed_or_removed_file_paths:
+        raise Exception("The PR does not allow changes or removal to existing files.")
+    expected_added_file_paths = [
+        os.path.join("experiments", "outputs", f"{prefix}_{set_name}", "leaderboard.json")
+        for prefix in experiment_prefixes for set_name in ["test_normal", "test_challenge"]
+    ]
+    added_file_paths = sorted(added_file_paths)
+    expected_added_file_paths = sorted(expected_added_file_paths)
+    if added_file_paths != expected_added_file_paths:
+        raise Exception(
+            "The added PR files do not match the expected ones."
+            f"\nExpected: {expected_added_file_paths}"
+            f"\nActual: {added_file_paths}"
+        )
+
+
 def main():
     parser = argparse.ArgumentParser(description="Add entries to the leaderboard.")
     parser.add_argument(
         "experiment-prefixes", nargs="+", type=str, help="experiment prefixes"
+    )
+    parser.add_argument(
+        "--validate-diff",
+        action="store_true",
+        help="validate the diff to ensure only expected new files are added.",
     )
     parser.add_argument(
         "--unpack-first",
