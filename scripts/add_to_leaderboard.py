@@ -95,7 +95,7 @@ def main():
             if args.pr_branch:
                 run_command(f"{uv_prefix}appworld unpack {experiment_name}")
                 run_command(f"{uv_prefix}appworld evaluate {experiment_name} {dataset_name}")
-            run_command(f"{uv_prefix}appworld make {' '.join(experiment_names)} --save")
+        run_command(f"{uv_prefix}appworld make {' '.join(experiment_names)} --save")
     added_leaderboard_data = read_json(leaderboard_file_path)[
         len(original_leaderboard_data) :
     ]
