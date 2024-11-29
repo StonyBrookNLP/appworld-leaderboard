@@ -63,12 +63,6 @@ jobs:
       - name: Fetch main branch
         run: git fetch origin main
 
-      - name: Check ls
-        run: ls
-
-      - name: Check pwd
-        run: pwd
-
       - name: Add leaderboard entry
         run: PYTHONPATH=$PYTHONPATH:. uv run scripts/add_to_leaderboard.py --pr-branch ${{ steps.get-branch.outputs.branch }} ${{ env.experiment_prefixes }}
 
@@ -122,6 +116,21 @@ jobs:
           ids="${comment#* }"
           echo "Entry IDs: $ids"
           echo "ids=$ids" >> $GITHUB_ENV
+
+      - uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.4.4"
+
+      - name: Set up Python
+        run: uv python install ${{ env.python_version }}
+
+      - name: Install venv
+        run: uv venv
+
+      - name: Install dependencies
+        run: |
+          uv pip install appworld==${{ env.appworld_version }}
+          uv run appworld install
 
       - name: Remove leaderboard entries
         run: PYTHONPATH=$PYTHONPATH:. uv run scripts/remove_from_leaderboard.py --save-removed --ids ${{ env.ids }}
