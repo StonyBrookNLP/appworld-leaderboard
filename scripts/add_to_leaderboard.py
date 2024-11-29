@@ -1,7 +1,12 @@
 import argparse
 import subprocess
 
-from appworld.common.utils import print_rule
+from rich import print as rprint
+from rich.rule import Rule
+
+
+def print_rule(title: str = "") -> None:
+    rprint(Rule(title=title))
 
 
 def run_command(command: str) -> None:
