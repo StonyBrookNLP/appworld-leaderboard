@@ -71,12 +71,12 @@ def main():
     )
     args = parser.parse_args()
     uv_prefix = "uv run " if args.pr_branch else ""
+    experiment_prefixes = getattr(args, "experiment-prefixes")
     if args.pr_branch:
-        validate_diff(args.experiment_prefixes)
-
+        validate_diff(experiment_prefixes)
     leaderboard_file_path = os.path.join("experiments", "outputs", "_leaderboard.json")
     original_leaderboard_data = read_json(leaderboard_file_path)
-    for experiment_prefix in args.experiment_prefixes:
+    for experiment_prefix in experiment_prefixes:
         print_rule(f"\nWorking on experiment prefix: {experiment_prefix}")
         experiment_names = [
             experiment_prefix + "_test_normal",
@@ -93,21 +93,9 @@ def main():
                 command = f"curl -L -o {local_file_path} https://github.com/stonybrooknlp/appworld-leaderboard/raw/{args.pr_branch}/{remote_file_path}"
                 run_command(command)
             if args.pr_branch:
-                run_command(
-                    f"{uv_prefix}appworld unpack {experiment_name}_{dataset_name}",
-                    check=True,
-                    shell=True,
-                )
-                run_command(
-                    f"{uv_prefix}appworld evaluate {experiment_name}_{dataset_name} {dataset_name}",
-                    check=True,
-                    shell=True,
-                )
-            run_command(
-                f"{uv_prefix}appworld make {experiment_name}_{dataset_name} {dataset_name} --save",
-                check=True,
-                shell=True,
-            )
+                run_command(f"{uv_prefix}appworld unpack {experiment_name}")
+                run_command(f"{uv_prefix}appworld evaluate {experiment_name} {dataset_name}")
+        run_command(f"{uv_prefix}appworld make {' '.join(experiment_names)} --save")
     added_leaderboard_data = read_json(leaderboard_file_path)[
         len(original_leaderboard_data) :
     ]
