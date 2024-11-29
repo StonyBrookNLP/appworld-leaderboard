@@ -63,6 +63,9 @@ jobs:
       - name: Fetch main branch
         run: git fetch origin main
 
+      - name: Reset leaderboard json file
+        run: curl -L -o experiments/outputs/_leaderboard.json https://github.com/stonybrooknlp/appworld-leaderboard/raw/main/experiments/outputs/_leaderboard.json
+
       - name: Add leaderboard entry
         run: PYTHONPATH=$PYTHONPATH:. uv run scripts/add_to_leaderboard.py --pr-branch ${{ steps.get-branch.outputs.branch }} ${{ env.experiment_prefixes }}
 
@@ -90,67 +93,4 @@ jobs:
             git push origin ${{ steps.get-branch.outputs.branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  remove-entry:
-    if: ${{ github.event.issue.pull_request && startsWith(github.event.comment.body, '/remove-from-leaderboard') }}
-    runs-on: ubuntu-latest
-    steps:
-
-      - name: Obtain PR branch
-        id: get-branch
-        run: echo "branch=$(gh pr view $PR_NO --repo $REPO --json headRefName --jq '.headRefName')" >> $GITHUB_OUTPUT
-        env:
-          REPO: ${{ github.repository }}
-          PR_NO: ${{ github.event.issue.number }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Checkout PR branch
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ steps.get-branch.outputs.branch }}
-
-      - name: Extract arguments from comment
-        id: extract_args
-        run: |
-          echo "Extracting arguments..."
-          comment="${{ github.event.comment.body }}"
-          ids="${comment#* }"
-          echo "Entry IDs: $ids"
-          echo "ids=$ids" >> $GITHUB_ENV
-
-      - uses: astral-sh/setup-uv@v3
-        with:
-          version: "0.4.4"
-
-      - name: Set up Python
-        run: uv python install 3.11
-
-      - name: Install venv
-        run: uv venv
-
-      - name: Remove leaderboard entries
-        run: PYTHONPATH=$PYTHONPATH:. uv run scripts/remove_from_leaderboard.py --save-removed --ids ${{ env.ids }}
-
-      - name: Comment on PR
-        if: ${{ success() }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const content = fs.readFileSync('.temp/removed_leaderboard_data.json', 'utf8');
-            const commentBody = `### Removed from leaderboard:\n${content}`;
-            const issue_number = context.issue.number;
-            await github.rest.issues.createComment({
-              ...context.repo,
-              issue_number: issue_number,
-              body: commentBody,
-            });
-
-      - name: Commit and push
-        run: |
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add -f experiments/outputs/_leaderboard.json
-            git commit -m "remove leaderboard entry"
-            git push origin ${{ steps.get-branch.outputs.branch }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
