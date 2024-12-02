@@ -70,7 +70,7 @@ Then create a PR with these two files and post a comment as follows. Here, `EXPE
 /add-to-leaderboard --python {PYTHON_VERSION} --appworld {APPWORLD_VERSION} {EXPERIMENT_NAME_PREFIX}
 ```
 
-This will start an automatic GitHub workflow which you can follow along in the Actions tab on the PR. If it's successful, it'll post a comment with your leaderboard entry in the PR, and update the leaderboard file, which you will be able to see in the PR diff as well. Verify the details in the comment. If you want to update the submission, just push updated bundle files and post the command comment again. Once you're happy with the result, assign the PR to me ([Harsh](https://github.com/harshTrivedi/)). I will take a look ASAP to ensure that no new changes are made after the last evaluation, and merge it.
+This will start an automatic GitHub workflow which you can follow along in the GitHb Actions tab. If it's successful, it'll post a comment with your leaderboard entry in the PR, and update the leaderboard file, which you will be able to see in the PR diff as well. Verify the details in the comment. If you want to update the submission, just push updated bundle files and post the command comment again. Once you're happy with the result, assign the PR to me ([Harsh](https://github.com/harshTrivedi/)). I will take a look ASAP to ensure that no new changes are made after the last evaluation, and merge it.
 
 Note that you can also submit multiple agents submissions in the same PR. In this case add more bundle files to the PR and add more space-delimited experiment name prefixes to the PR command comment.
 
