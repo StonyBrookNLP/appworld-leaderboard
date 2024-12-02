@@ -796,5 +796,62 @@
                 "interactions": 26.61
             }
         }
+    },
+    {
+        "id": "5509efd4-3e4bf4e2",
+        "method": {
+            "name": "temp",
+            "tooltip": "temp"
+        },
+        "llm": {
+            "name": "temp",
+            "tooltip": "temp"
+        },
+        "url": "temp",
+        "date": "2024-11-29",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 9.5,
+                "scenario_goal_completion": 7.1,
+                "interactions": 3.32
+            },
+            "level 1": {
+                "task_goal_completion": 28.1,
+                "scenario_goal_completion": 21.1,
+                "interactions": 3.32
+            },
+            "level 2": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 3.32
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 3.32
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 5.5,
+                "scenario_goal_completion": 4.3,
+                "interactions": 4.39
+            },
+            "level 1": {
+                "task_goal_completion": 26.4,
+                "scenario_goal_completion": 20.8,
+                "interactions": 4.39
+            },
+            "level 2": {
+                "task_goal_completion": 2.7,
+                "scenario_goal_completion": 2.0,
+                "interactions": 4.39
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 4.39
+            }
+        }
     }
 ]
