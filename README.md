@@ -2,7 +2,7 @@
 
 This is the leaderboard repository of the benchmark proposed in [AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents](https://appworld.dev/) (ACL 2024).
 
-The project's main repository is [here](https://github.com/stonybrooknlp/appworld), and leaderboard UI is [here](https://appworld.dev/leaderboard). This repository stores bundled (encrypted) experiment outputs from participanting models (including our baselines) and the raw [leaderboard data JSON](/leaderboard.json) which is dynamically rendered in the UI. You can use this repository to:
+The project's main repository is [here](https://github.com/stonybrooknlp/appworld), and leaderboard UI is [here](https://appworld.dev/leaderboard). This repository stores bundled (encrypted) experiment outputs from participanting models (including our baselines) and the raw [leaderboard data JSON](/experiments/outputs/_leaderboard.json) which is dynamically rendered in the UI. You can use this repository to:
 
 1. Download and locally view experiment outputs from other participanting methods.
 2. Submit your own agent's experiment outputs to be included on the leaderboard via a PR.
@@ -63,7 +63,16 @@ The pack command compresses and encrypts the experiment outputs in `leaderboard.
 ./experiments/outputs/{test_challenge_experiment_name}/leaderboard.bundle
 ```
 
-And then create a PR with these two files. The Github actions will run evaluations and post your results on the PR. We will review the submission and merge it. When merged, the leaderboard on the website will update automatically.
+Then create a PR with these two files and post a comment as follows. Here, `EXPERIMENT_NAME_PREFIX` refers to the experiment name without the suffix of `_test_normal` and `_test_challenge` for the two splits.
+
+```bash
+# Change python and appworld version as desired. NOTE: Make sure there is not white space in the comment before the command starts.
+/add-to-leaderboard --python {PYTHON_VERSION} --appworld {APPWORLD_VERSION} {EXPERIMENT_NAME_PREFIX}
+```
+
+This will start an automatic GitHub workflow which you can follow along in the Actions tab on the PR. If it's successful, it'll post a comment with your leaderboard entry in the PR, and update the leaderboard file, which you will be able to see in the PR diff as well. Verify the details in the comment. If you want to update the submission, just push updated bundle files and post the command comment again. Once you're happy with the result, assing me (Harsh) to the PR. I'll take a look ASAP to ensure that no new changes are made after the last evaluation, and merge it.
+
+Note that you can also submit multiple agents submissions in the same PR. In this case add more bundle files to the PR and add more space-delimited experiment name prefixes to the PR command comment.
 
 > [!IMPORTANT]
 > **Reminder:** We track experiment outputs in encrypted `.bundle` files to reduce the risk of it becoming part of the training corpora of LLMs. So please do NOT post it here (or anywhere else publicly on the interent) in unencrypted or uncompressed format. See [license](https://github.com/stonybrooknlp/appworld/tree/main?tab=readme-ov-file#lock_with_ink_pen-license).
