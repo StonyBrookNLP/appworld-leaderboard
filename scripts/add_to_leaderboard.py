@@ -30,8 +30,15 @@ def run_command(command: str) -> None:
 
 
 def validate_diff(experiment_prefixes: list[str]) -> None:
+    temporary_remote = "temp-remote"
+    subprocess.run(
+        ["git", "remote", "add", temporary_remote, MAIN_REPO_REMOTE],
+        check=True,
+        text=True,
+    )
+    subprocess.run(["git", "fetch", temporary_remote], check=True, text=True)
     output = subprocess.run(
-        ["git", "diff", f"{MAIN_REPO_REMOTE}/main", "--diff-filter=A", "--name-only"],
+        ["git", "diff", f"{temporary_remote}/main", "--diff-filter=A", "--name-only"],
         capture_output=True,
         text=True,
     )
@@ -42,10 +49,11 @@ def validate_diff(experiment_prefixes: list[str]) -> None:
         if file_path != os.path.join("experiments", "outputs", "_leaderboard.json")
     ]
     output = subprocess.run(
-        ["git", "diff", f"{MAIN_REPO_REMOTE}/main", "--diff-filter=MD", "--name-only"],
+        ["git", "diff", f"{temporary_remote}/main", "--diff-filter=MD", "--name-only"],
         capture_output=True,
         text=True,
     )
+    subprocess.run(["git", "remote", "remove", temporary_remote], check=True, text=True)
     changed_or_removed_file_paths = output.stdout.strip().splitlines()
     if changed_or_removed_file_paths:
         raise Exception(
