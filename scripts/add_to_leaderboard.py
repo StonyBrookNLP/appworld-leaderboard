@@ -72,18 +72,29 @@ def main():
         "experiment-prefixes", nargs="+", type=str, help="experiment prefixes"
     )
     parser.add_argument(
+        "--pr-repo",
+        type=str,
+        default="",
+        help="If this is run from a github action PR workflow, pass this. Otherwise, leave it empty.",
+    )
+    parser.add_argument(
         "--pr-branch",
         type=str,
         default="",
         help="If this is run from a github action PR workflow, pass this. Otherwise, leave it empty.",
     )
     args = parser.parse_args()
+    if bool(args.pr_repo) != bool(args.pr_branch):
+        raise Exception(
+            "Either both --pr-repo and --pr-branch should be provided, or neither."
+        )
     uv_prefix = "uv run " if args.pr_branch else ""
     experiment_prefixes = getattr(args, "experiment-prefixes")
     if args.pr_branch:
         validate_diff(experiment_prefixes)
     leaderboard_file_path = os.path.join("experiments", "outputs", "_leaderboard.json")
     original_leaderboard_data = read_json(leaderboard_file_path)
+    pr_repo = args.pr_repo or "stonybrooknlp/appworld-leaderboard"
     for experiment_prefix in experiment_prefixes:
         print_rule(f"\nWorking on experiment prefix: {experiment_prefix}")
         experiment_names = [
@@ -97,7 +108,7 @@ def main():
                     f"experiments/outputs/{experiment_name}/leaderboard.bundle"
                 )
                 local_file_path = os.sep.join(remote_file_path.split("/"))
-                command = f"curl -L -o {local_file_path} https://github.com/stonybrooknlp/appworld-leaderboard/raw/{args.pr_branch}/{remote_file_path}"
+                command = f"curl -L -o {local_file_path} https://github.com/{pr_repo}/raw/{args.pr_branch}/{remote_file_path}"
                 run_command(command)
                 run_command(f"{uv_prefix}appworld unpack {experiment_name}")
                 run_command(
