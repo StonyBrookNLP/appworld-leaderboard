@@ -5,6 +5,9 @@ import subprocess
 from scripts.lib import read_json, write_json
 
 
+MAIN_REPO_REMOTE = "https://github.com/stonybrooknlp/appworld-leaderboard.git"
+
+
 def print_rule(title: str = "") -> None:
     line = "-" * 40
     if title:
@@ -28,7 +31,7 @@ def run_command(command: str) -> None:
 
 def validate_diff(experiment_prefixes: list[str]) -> None:
     output = subprocess.run(
-        ["git", "diff", "origin/main", "--diff-filter=A", "--name-only"],
+        ["git", "diff", f"{MAIN_REPO_REMOTE}/main", "--diff-filter=A", "--name-only"],
         capture_output=True,
         text=True,
     )
@@ -39,7 +42,7 @@ def validate_diff(experiment_prefixes: list[str]) -> None:
         if file_path != os.path.join("experiments", "outputs", "_leaderboard.json")
     ]
     output = subprocess.run(
-        ["git", "diff", "origin/main", "--diff-filter=MD", "--name-only"],
+        ["git", "diff", f"{MAIN_REPO_REMOTE}/main", "--diff-filter=MD", "--name-only"],
         capture_output=True,
         text=True,
     )
