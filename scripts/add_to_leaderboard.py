@@ -45,7 +45,10 @@ def validate_diff(experiment_prefixes: list[str]) -> None:
     )
     changed_or_removed_file_paths = output.stdout.strip().splitlines()
     if changed_or_removed_file_paths:
-        raise Exception("The PR does not allow changes or removal to existing files.")
+        raise Exception(
+            "The PR does not allow changes or removal to existing files."
+            f"\nChanged/removed files: {changed_or_removed_file_paths}"
+        )
     expected_added_file_paths = [
         os.path.join(
             "experiments", "outputs", f"{prefix}_{set_name}", "leaderboard.bundle"
@@ -88,18 +91,18 @@ def main():
             experiment_prefix + "_test_challenge",
         ]
         dataset_names = ["test_normal", "test_challenge"]
-        for experiment_name, dataset_name in zip(experiment_names, dataset_names):
-            # maybe download leaderboard bundle
-            if args.pr_branch:
+        if args.pr_branch:
+            for experiment_name, dataset_name in zip(experiment_names, dataset_names):
                 remote_file_path = (
                     f"experiments/outputs/{experiment_name}/leaderboard.bundle"
                 )
                 local_file_path = os.sep.join(remote_file_path.split("/"))
                 command = f"curl -L -o {local_file_path} https://github.com/stonybrooknlp/appworld-leaderboard/raw/{args.pr_branch}/{remote_file_path}"
                 run_command(command)
-            if args.pr_branch:
                 run_command(f"{uv_prefix}appworld unpack {experiment_name}")
-                run_command(f"{uv_prefix}appworld evaluate {experiment_name} {dataset_name}")
+                run_command(
+                    f"{uv_prefix}appworld evaluate {experiment_name} {dataset_name}"
+                )
         run_command(f"{uv_prefix}appworld make {' '.join(experiment_names)} --save")
     added_leaderboard_data = read_json(leaderboard_file_path)[
         len(original_leaderboard_data) :
