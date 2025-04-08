@@ -76,7 +76,7 @@ jobs:
         run: curl -L -o experiments/outputs/_leaderboard.json https://github.com/stonybrooknlp/appworld-leaderboard/raw/main/experiments/outputs/_leaderboard.json
 
       - name: Add leaderboard entry
-        run: PYTHONPATH=$PYTHONPATH:. uv run scripts/add_to_leaderboard.py --pr-branch ${{ steps.get-branch.outputs.branch }} ${{ env.experiment_prefixes }}
+        run: PYTHONPATH=$PYTHONPATH:. uv run scripts/add_to_leaderboard.py --pr-repo ${{ steps.get-branch.outputs.repo }} --pr-branch ${{ steps.get-branch.outputs.branch }} ${{ env.experiment_prefixes }}
 
       - name: Comment on PR
         if: ${{ success() }}
