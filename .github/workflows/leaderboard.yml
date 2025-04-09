@@ -97,9 +97,11 @@ jobs:
         run: |
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
+            PUSH_URL="https://x-access-token:${GH_PAT}@github.com/${{ steps.get-branch.outputs.repo }}"
+            git config lfs."${PUSH_URL}.git".locksverify false
             git add -f experiments/outputs/_leaderboard.json
             git commit -m "add leaderboard entry" || true
-            git push https://x-access-token:${GH_PAT}@github.com/${{ steps.get-branch.outputs.repo }} HEAD:${{ steps.get-branch.outputs.branch }} || true
+            git push "$PUSH_URL" HEAD:${{ steps.get-branch.outputs.branch }} || true
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
   
