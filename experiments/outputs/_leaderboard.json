@@ -796,5 +796,62 @@
                 "interactions": 26.61
             }
         }
+    },
+    {
+        "id": "e5e08b7e-d8e6474f",
+        "method": {
+            "name": "LOOP",
+            "tooltip": "Leave-one-out PPO"
+        },
+        "llm": {
+            "name": "Qwen2.5-32B",
+            "tooltip": "Qwen-2.5-32B-Instruct"
+        },
+        "url": "https://arxiv.org/abs/2502.01600",
+        "date": "2025-04-09",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 72.6,
+                "scenario_goal_completion": 53.6,
+                "interactions": 17.44
+            },
+            "level 1": {
+                "task_goal_completion": 87.7,
+                "scenario_goal_completion": 79.0,
+                "interactions": 17.44
+            },
+            "level 2": {
+                "task_goal_completion": 89.6,
+                "scenario_goal_completion": 75.0,
+                "interactions": 17.44
+            },
+            "level 3": {
+                "task_goal_completion": 46.0,
+                "scenario_goal_completion": 14.3,
+                "interactions": 17.44
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 47.2,
+                "scenario_goal_completion": 28.8,
+                "interactions": 22.23
+            },
+            "level 1": {
+                "task_goal_completion": 73.6,
+                "scenario_goal_completion": 58.3,
+                "interactions": 22.23
+            },
+            "level 2": {
+                "task_goal_completion": 40.7,
+                "scenario_goal_completion": 22.0,
+                "interactions": 22.23
+            },
+            "level 3": {
+                "task_goal_completion": 42.6,
+                "scenario_goal_completion": 23.1,
+                "interactions": 22.23
+            }
+        }
     }
 ]
