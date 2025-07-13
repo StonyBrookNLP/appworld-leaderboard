@@ -892,7 +892,7 @@
             "all": {
                 "task_goal_completion": 57.6,
                 "scenario_goal_completion": 48.2,
-                "interactions": 8.40
+                "interactions": 8.4
             },
             "level 1": {
                 "task_goal_completion": 91.7,
@@ -908,6 +908,63 @@
                 "task_goal_completion": 44.1,
                 "scenario_goal_completion": 38.5,
                 "interactions": 11.86
+            }
+        }
+    },
+    {
+        "id": "1c12639a-57a0ac34",
+        "method": {
+            "name": "ReAct + 2 SetBSR Demos",
+            "tooltip": "ReAct + 2 SetBSR-Selected Trajectory Demonstrations"
+        },
+        "llm": {
+            "name": "GPT-4o",
+            "tooltip": "gpt-4o-2024-08-06"
+        },
+        "url": "https://arxiv.org/abs/2506.13109",
+        "date": "2025-07-13",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 68.5,
+                "scenario_goal_completion": 57.1,
+                "interactions": 23.85
+            },
+            "level 1": {
+                "task_goal_completion": 87.7,
+                "scenario_goal_completion": 73.7,
+                "interactions": 23.85
+            },
+            "level 2": {
+                "task_goal_completion": 79.2,
+                "scenario_goal_completion": 68.8,
+                "interactions": 23.85
+            },
+            "level 3": {
+                "task_goal_completion": 42.9,
+                "scenario_goal_completion": 33.3,
+                "interactions": 23.85
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 38.9,
+                "scenario_goal_completion": 23.0,
+                "interactions": 28.59
+            },
+            "level 1": {
+                "task_goal_completion": 68.1,
+                "scenario_goal_completion": 54.2,
+                "interactions": 28.59
+            },
+            "level 2": {
+                "task_goal_completion": 34.0,
+                "scenario_goal_completion": 14.0,
+                "interactions": 28.59
+            },
+            "level 3": {
+                "task_goal_completion": 31.8,
+                "scenario_goal_completion": 18.5,
+                "interactions": 28.59
             }
         }
     }
