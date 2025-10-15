@@ -13,11 +13,7 @@ def print_rule(title: str = "") -> None:
     if title:
         title_line = f" {title} "
         center_position = (len(line) - len(title_line)) // 2
-        line = (
-            line[:center_position]
-            + title_line
-            + line[center_position + len(title_line) :]
-        )
+        line = line[:center_position] + title_line + line[center_position + len(title_line) :]
     print(line)
 
 
@@ -61,9 +57,7 @@ def validate_diff(experiment_prefixes: list[str]) -> None:
             f"\nChanged/removed files: {changed_or_removed_file_paths}"
         )
     expected_added_file_paths = [
-        os.path.join(
-            "experiments", "outputs", f"{prefix}_{set_name}", "leaderboard.bundle"
-        )
+        os.path.join("experiments", "outputs", f"{prefix}_{set_name}", "leaderboard.bundle")
         for prefix in experiment_prefixes
         for set_name in ["test_normal", "test_challenge"]
     ]
@@ -79,9 +73,7 @@ def validate_diff(experiment_prefixes: list[str]) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description="Add entries to the leaderboard.")
-    parser.add_argument(
-        "experiment-prefixes", nargs="+", type=str, help="experiment prefixes"
-    )
+    parser.add_argument("experiment-prefixes", nargs="+", type=str, help="experiment prefixes")
     parser.add_argument(
         "--pr-repo",
         type=str,
@@ -96,9 +88,7 @@ def main():
     )
     args = parser.parse_args()
     if bool(args.pr_repo) != bool(args.pr_branch):
-        raise Exception(
-            "Either both --pr-repo and --pr-branch should be provided, or neither."
-        )
+        raise Exception("Either both --pr-repo and --pr-branch should be provided, or neither.")
     uv_prefix = "uv run " if args.pr_branch else ""
     experiment_prefixes = getattr(args, "experiment-prefixes")
     if args.pr_branch:
@@ -114,26 +104,18 @@ def main():
         ]
         dataset_names = ["test_normal", "test_challenge"]
         if args.pr_branch:
-            for experiment_name, dataset_name in zip(experiment_names, dataset_names):
-                remote_file_path = (
-                    f"experiments/outputs/{experiment_name}/leaderboard.bundle"
-                )
+            for experiment_name, dataset_name in zip(experiment_names, dataset_names, strict=False):
+                remote_file_path = f"experiments/outputs/{experiment_name}/leaderboard.bundle"
                 local_file_path = os.sep.join(remote_file_path.split("/"))
                 command = f"curl -L -o {local_file_path} https://github.com/{pr_repo}/raw/{args.pr_branch}/{remote_file_path}"
                 run_command(command)
                 run_command(f"{uv_prefix}appworld unpack {experiment_name}")
-                run_command(
-                    f"{uv_prefix}appworld evaluate {experiment_name} {dataset_name}"
-                )
+                run_command(f"{uv_prefix}appworld evaluate {experiment_name} {dataset_name}")
         run_command(f"{uv_prefix}appworld make {' '.join(experiment_names)} --save")
-    added_leaderboard_data = read_json(leaderboard_file_path)[
-        len(original_leaderboard_data) :
-    ]
+    added_leaderboard_data = read_json(leaderboard_file_path)[len(original_leaderboard_data) :]
     if args.pr_branch:
         os.makedirs(".temp", exist_ok=True)
-        added_leaderboard_data_file_path = os.path.join(
-            ".temp", "added_leaderboard_data.json"
-        )
+        added_leaderboard_data_file_path = os.path.join(".temp", "added_leaderboard_data.json")
         write_json(added_leaderboard_data, added_leaderboard_data_file_path)
 
 
