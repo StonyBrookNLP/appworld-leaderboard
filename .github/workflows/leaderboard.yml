@@ -61,6 +61,10 @@ jobs:
       - name: Install venv
         run: uv venv
 
+      - name: Fix typer incompatibility  # https://github.com/StonyBrookNLP/appworld/issues/158
+        if: ${{ env.appworld_version == '0.1.0' || env.appworld_version == '0.1.1' || env.appworld_version == '0.1.2' || env.appworld_version == '0.1.3' }}
+        run: uv pip install "typer>=0.16.0"
+
       - name: Install dependencies
         run: |
           uv pip install appworld==${{ env.appworld_version }}
