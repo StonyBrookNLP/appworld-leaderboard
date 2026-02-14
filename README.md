@@ -34,21 +34,21 @@ Now, `pack` the two experiments, individually, with the following commands, and 
 ```bash
 appworld pack {test_normal_experiment_name|test_challenge_experiment_name} \
     # The method name used in the experiment:
-    --method_name METHOD_NAME \
+    METHOD_NAME \
     # A brief additional note about the method:
-    --method_tooltip METHOD_TOOLTIP \
+    METHOD_TOOLTIP \
     # The LLM name used in the experiment:
-    --llm_name LLM_NAME \
+    LLM_NAME \
     # A brief additional note about the LLM
-    --llm_tooltip \
+    LLM_TOOLTIP \
     # URL to find more information about this submission
-    -url URL
+    URL
 # Example:
 # appworld pack react_gpt4o_test_normal \
-#   --method_name react
-#   --method_tooltip 'Reason + Act'
-#   --llm_name 'GPT4-o'
-#   --url 'https://appworld.dev/'
+#   react \
+#   'Reason + Act' \
+#   'GPT4-o' \
+#   'https://appworld.dev/'
 ```
 
 The pack command compresses and encrypts the experiment outputs in `leaderboard.bundle` files within your experiment output directories. E.g., `./experiments/outputs/react_gpt4o_test_normal/leaderboard.bundle`.
@@ -68,9 +68,15 @@ Then create a PR with these two files and post a comment as follows. Here, `EXPE
 ```bash
 # Change python and appworld version as desired. NOTE: Make sure there is not white space in the comment before the command starts.
 /add-to-leaderboard --python {PYTHON_VERSION} --appworld {APPWORLD_VERSION} {EXPERIMENT_NAME_PREFIX}
+# APPWORLD_VERSION can be any version available on pypi: https://pypi.org/project/appworld/#history, e.g., 0.1.3
+# Alternatively, you may use the latest development version directly from GitHub:
+# "git+https://github.com/stonybrooknlp/appworld.git" (for a specific Git commit, append "@<commit-hash>")
+# Examples:
+# /add-to-leaderboard --python 3.11 --appworld 0.1.3 react_gpt4o
+# /add-to-leaderboard --python 3.11 --appworld "git+https://github.com/stonybrooknlp/appworld.git" react_gpt4o
 ```
 
-This will start an automatic GitHub workflow which you can follow along in the GitHb Actions tab. If it's successful, it'll post a comment with your leaderboard entry in the PR, and update the leaderboard file, which you will be able to see in the PR diff as well. Verify the details in the comment. If you want to update the submission, just push updated bundle files and post the command comment again. Once you're happy with the result, assign the PR to me ([Harsh](https://github.com/harshTrivedi/)). I will take a look ASAP to ensure that no new changes are made after the last evaluation, and merge it.
+This will start an automatic GitHub workflow which you can follow along in the GitHb Actions tab. If it's successful, it'll post a comment with your leaderboard entry in the PR, and update the leaderboard file, which you will be able to see in the PR diff as well. Verify the details in the comment. If you want to update the submission, just push updated bundle files and post the command comment again. Once you're happy with the result, assign the PR to me ([Harsh](https://github.com/harshTrivedi/)) or ping me. I will take a look ASAP to ensure that no new changes are made after the last evaluation, and merge it.
 
 Note that you can also submit multiple agents submissions in the same PR. In this case add more bundle files to the PR and add more space-delimited experiment name prefixes to the PR command comment.
 
