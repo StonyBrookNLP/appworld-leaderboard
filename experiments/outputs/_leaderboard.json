@@ -969,17 +969,17 @@
         }
     },
     {
-        "id": "21676970-fccfb35b",
+        "id": "cabab065-0caee3c3",
         "method": {
             "name": "Alibaba Cloud ApsaraLab AgentRL",
-            "tooltip": ""
+            "tooltip": "Alibaba Cloud ApsaraLab AgentRL"
         },
         "llm": {
             "name": "Qwen3-14B",
-            "tooltip": ""
+            "tooltip": "Qwen3-14B"
         },
         "url": "https://www.aliyun.com/product/bailian",
-        "date": "2026-02-14",
+        "date": "2026-02-15",
         "test_normal": {
             "all": {
                 "task_goal_completion": 86.9,
