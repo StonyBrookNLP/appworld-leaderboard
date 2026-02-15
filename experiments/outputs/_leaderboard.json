@@ -967,5 +967,62 @@
                 "interactions": 28.59
             }
         }
+    },
+    {
+        "id": "cabab065-0caee3c3",
+        "method": {
+            "name": "Alibaba Cloud ApsaraLab AgentRL",
+            "tooltip": "Alibaba Cloud ApsaraLab AgentRL"
+        },
+        "llm": {
+            "name": "Qwen3-14B",
+            "tooltip": "Qwen3-14B"
+        },
+        "url": "https://www.aliyun.com/product/bailian",
+        "date": "2026-02-15",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 86.9,
+                "scenario_goal_completion": 80.4,
+                "interactions": 29.51
+            },
+            "level 1": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 29.51
+            },
+            "level 2": {
+                "task_goal_completion": 91.7,
+                "scenario_goal_completion": 87.5,
+                "interactions": 29.51
+            },
+            "level 3": {
+                "task_goal_completion": 71.4,
+                "scenario_goal_completion": 57.1,
+                "interactions": 29.51
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 67.6,
+                "scenario_goal_completion": 50.4,
+                "interactions": 41.78
+            },
+            "level 1": {
+                "task_goal_completion": 88.9,
+                "scenario_goal_completion": 79.2,
+                "interactions": 41.78
+            },
+            "level 2": {
+                "task_goal_completion": 62.7,
+                "scenario_goal_completion": 40.0,
+                "interactions": 41.78
+            },
+            "level 3": {
+                "task_goal_completion": 63.6,
+                "scenario_goal_completion": 47.7,
+                "interactions": 41.78
+            }
+        }
     }
 ]
