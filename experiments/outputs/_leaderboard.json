@@ -1024,5 +1024,62 @@
                 "interactions": 41.78
             }
         }
+    },
+    {
+        "id": "5acab4bb-badb978f",
+        "method": {
+            "name": "RooAGI_agentbuilder_memtune_rl",
+            "tooltip": "RooAGI AgentBuilder MEMTune RL"
+        },
+        "llm": {
+            "name": "gptoss-20b",
+            "tooltip": "openai"
+        },
+        "url": "https://agentbuilder.rooagi.com/",
+        "date": "2026-02-22",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 76.2,
+                "scenario_goal_completion": 58.9,
+                "interactions": 10.85
+            },
+            "level 1": {
+                "task_goal_completion": 91.2,
+                "scenario_goal_completion": 73.7,
+                "interactions": 10.85
+            },
+            "level 2": {
+                "task_goal_completion": 91.7,
+                "scenario_goal_completion": 75.0,
+                "interactions": 10.85
+            },
+            "level 3": {
+                "task_goal_completion": 50.8,
+                "scenario_goal_completion": 33.3,
+                "interactions": 10.85
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 15.3,
+                "scenario_goal_completion": 7.9,
+                "interactions": 17.03
+            },
+            "level 1": {
+                "task_goal_completion": 55.6,
+                "scenario_goal_completion": 37.5,
+                "interactions": 17.03
+            },
+            "level 2": {
+                "task_goal_completion": 11.3,
+                "scenario_goal_completion": 2.0,
+                "interactions": 17.03
+            },
+            "level 3": {
+                "task_goal_completion": 3.6,
+                "scenario_goal_completion": 1.5,
+                "interactions": 17.03
+            }
+        }
     }
 ]
