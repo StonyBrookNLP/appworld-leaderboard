@@ -1024,5 +1024,62 @@
                 "interactions": 41.78
             }
         }
+    },
+    {
+        "id": "1095b768-6513e0c6",
+        "method": {
+            "name": "kecaipan capybara",
+            "tooltip": "Self-organizing context assets learned on train and frozen for closed-book evaluation"
+        },
+        "llm": {
+            "name": "gpt-5.6-luna",
+            "tooltip": "LongjiTech OpenAI-compatible Responses API; model ID gpt-5.6-luna"
+        },
+        "url": "https://github.com/pkc000pkc/capybara",
+        "date": "2026-08-08",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 85.1,
+                "scenario_goal_completion": 73.2,
+                "interactions": 9.34
+            },
+            "level 1": {
+                "task_goal_completion": 94.7,
+                "scenario_goal_completion": 84.2,
+                "interactions": 9.34
+            },
+            "level 2": {
+                "task_goal_completion": 93.8,
+                "scenario_goal_completion": 81.2,
+                "interactions": 9.34
+            },
+            "level 3": {
+                "task_goal_completion": 69.8,
+                "scenario_goal_completion": 57.1,
+                "interactions": 9.34
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 73.4,
+                "scenario_goal_completion": 52.5,
+                "interactions": 11.17
+            },
+            "level 1": {
+                "task_goal_completion": 83.3,
+                "scenario_goal_completion": 58.3,
+                "interactions": 11.17
+            },
+            "level 2": {
+                "task_goal_completion": 68.7,
+                "scenario_goal_completion": 48.0,
+                "interactions": 11.17
+            },
+            "level 3": {
+                "task_goal_completion": 73.3,
+                "scenario_goal_completion": 53.8,
+                "interactions": 11.17
+            }
+        }
     }
 ]
