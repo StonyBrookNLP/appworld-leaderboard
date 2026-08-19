@@ -1024,5 +1024,62 @@
                 "interactions": 41.78
             }
         }
+    },
+    {
+        "id": "d4e4dfa2-56b41bee",
+        "method": {
+            "name": "LARA MAS",
+            "tooltip": "Explorer writes an app-tagged plan; per-app specialist executors run a ReAct loop; single attempt per task"
+        },
+        "llm": {
+            "name": "gpt-4.1-mini",
+            "tooltip": "gpt-4.1-mini for all agents (explorer, executor, supervisor)"
+        },
+        "url": "https://github.com/Omer212111/LARA",
+        "date": "2026-08-19",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 17.9,
+                "scenario_goal_completion": 14.3,
+                "interactions": 21.11
+            },
+            "level 1": {
+                "task_goal_completion": 47.4,
+                "scenario_goal_completion": 36.8,
+                "interactions": 21.11
+            },
+            "level 2": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 21.11
+            },
+            "level 3": {
+                "task_goal_completion": 4.8,
+                "scenario_goal_completion": 4.8,
+                "interactions": 21.11
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 6.7,
+                "scenario_goal_completion": 5.0,
+                "interactions": 24.75
+            },
+            "level 1": {
+                "task_goal_completion": 36.1,
+                "scenario_goal_completion": 29.2,
+                "interactions": 24.75
+            },
+            "level 2": {
+                "task_goal_completion": 1.3,
+                "scenario_goal_completion": 0.0,
+                "interactions": 24.75
+            },
+            "level 3": {
+                "task_goal_completion": 0.0,
+                "scenario_goal_completion": 0.0,
+                "interactions": 24.75
+            }
+        }
     }
 ]
