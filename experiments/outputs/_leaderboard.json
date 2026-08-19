@@ -1026,7 +1026,7 @@
         }
     },
     {
-        "id": "d4e4dfa2-56b41bee",
+        "id": "695a4b55-1b68dde4",
         "method": {
             "name": "LARA MAS",
             "tooltip": "Explorer writes an app-tagged plan; per-app specialist executors run a ReAct loop; single attempt per task"
@@ -1039,45 +1039,45 @@
         "date": "2026-08-19",
         "test_normal": {
             "all": {
-                "task_goal_completion": 17.9,
-                "scenario_goal_completion": 14.3,
+                "task_goal_completion": 61.9,
+                "scenario_goal_completion": 50.0,
                 "interactions": 21.11
             },
             "level 1": {
-                "task_goal_completion": 47.4,
-                "scenario_goal_completion": 36.8,
+                "task_goal_completion": 91.2,
+                "scenario_goal_completion": 79.0,
                 "interactions": 21.11
             },
             "level 2": {
-                "task_goal_completion": 0.0,
-                "scenario_goal_completion": 0.0,
+                "task_goal_completion": 52.1,
+                "scenario_goal_completion": 43.8,
                 "interactions": 21.11
             },
             "level 3": {
-                "task_goal_completion": 4.8,
-                "scenario_goal_completion": 4.8,
+                "task_goal_completion": 42.9,
+                "scenario_goal_completion": 28.6,
                 "interactions": 21.11
             }
         },
         "test_challenge": {
             "all": {
-                "task_goal_completion": 6.7,
-                "scenario_goal_completion": 5.0,
+                "task_goal_completion": 37.6,
+                "scenario_goal_completion": 20.1,
                 "interactions": 24.75
             },
             "level 1": {
-                "task_goal_completion": 36.1,
-                "scenario_goal_completion": 29.2,
+                "task_goal_completion": 72.2,
+                "scenario_goal_completion": 45.8,
                 "interactions": 24.75
             },
             "level 2": {
-                "task_goal_completion": 1.3,
-                "scenario_goal_completion": 0.0,
+                "task_goal_completion": 36.0,
+                "scenario_goal_completion": 18.0,
                 "interactions": 24.75
             },
             "level 3": {
-                "task_goal_completion": 0.0,
-                "scenario_goal_completion": 0.0,
+                "task_goal_completion": 26.2,
+                "scenario_goal_completion": 12.3,
                 "interactions": 24.75
             }
         }
