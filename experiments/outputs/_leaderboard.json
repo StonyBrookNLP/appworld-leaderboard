@@ -1047,6 +1047,27 @@
                 "task_goal_completion": 100.0,
                 "scenario_goal_completion": 100.0,
                 "interactions": 1.0
+        "id": "f072cd07-6ae0fbdf",
+        "method": {
+            "name": "Button Agent",
+            "tooltip": "Button Agent"
+        },
+        "llm": {
+            "name": "Claude Opus 4.6",
+            "tooltip": "claude-opus-4-6"
+        },
+        "url": "https://distyl.ai/",
+        "date": "2026-03-23",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 91.1,
+                "scenario_goal_completion": 89.3,
+                "interactions": 15.89
+            },
+            "level 1": {
+                "task_goal_completion": 82.5,
+                "scenario_goal_completion": 79.0,
+                "interactions": 15.89
             },
             "level 2": {
                 "task_goal_completion": 100.0,
@@ -1057,6 +1078,43 @@
                 "task_goal_completion": 90.5,
                 "scenario_goal_completion": 90.5,
                 "interactions": 1.0
+                "interactions": 15.89
+            },
+            "level 3": {
+                "task_goal_completion": 92.1,
+                "scenario_goal_completion": 90.5,
+                "interactions": 15.89
+        "id": "5acab4bb-badb978f",
+        "method": {
+            "name": "RooAGI_agentbuilder_memtune_rl",
+            "tooltip": "RooAGI AgentBuilder MEMTune RL"
+        },
+        "llm": {
+            "name": "gptoss-20b",
+            "tooltip": "openai"
+        },
+        "url": "https://agentbuilder.rooagi.com/",
+        "date": "2026-02-22",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 76.2,
+                "scenario_goal_completion": 58.9,
+                "interactions": 10.85
+            },
+            "level 1": {
+                "task_goal_completion": 91.2,
+                "scenario_goal_completion": 73.7,
+                "interactions": 10.85
+            },
+            "level 2": {
+                "task_goal_completion": 91.7,
+                "scenario_goal_completion": 75.0,
+                "interactions": 10.85
+            },
+            "level 3": {
+                "task_goal_completion": 50.8,
+                "scenario_goal_completion": 33.3,
+                "interactions": 10.85
             }
         },
         "test_challenge": {
@@ -1079,6 +1137,42 @@
                 "task_goal_completion": 98.0,
                 "scenario_goal_completion": 96.9,
                 "interactions": 1.0
+                "task_goal_completion": 72.4,
+                "scenario_goal_completion": 64.8,
+                "interactions": 20.52
+            },
+            "level 1": {
+                "task_goal_completion": 76.4,
+                "scenario_goal_completion": 70.8,
+                "interactions": 20.52
+            },
+            "level 2": {
+                "task_goal_completion": 70.0,
+                "scenario_goal_completion": 62.0,
+                "interactions": 20.52
+            },
+            "level 3": {
+                "task_goal_completion": 72.8,
+                "scenario_goal_completion": 64.6,
+                "interactions": 20.52
+                "task_goal_completion": 15.3,
+                "scenario_goal_completion": 7.9,
+                "interactions": 17.03
+            },
+            "level 1": {
+                "task_goal_completion": 55.6,
+                "scenario_goal_completion": 37.5,
+                "interactions": 17.03
+            },
+            "level 2": {
+                "task_goal_completion": 11.3,
+                "scenario_goal_completion": 2.0,
+                "interactions": 17.03
+            },
+            "level 3": {
+                "task_goal_completion": 3.6,
+                "scenario_goal_completion": 1.5,
+                "interactions": 17.03
             }
         }
     }
