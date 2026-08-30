@@ -1026,126 +1026,6 @@
         }
     },
     {
-        "id": "695a4b55-1b68dde4",
-        "method": {
-            "name": "LARA MAS",
-            "tooltip": "Explorer writes an app-tagged plan; per-app specialist executors run a ReAct loop; single attempt per task"
-        },
-        "llm": {
-            "name": "gpt-4.1-mini",
-            "tooltip": "gpt-4.1-mini for all agents (explorer, executor, supervisor)"
-        },
-        "url": "https://github.com/Omer212111/LARA",
-        "date": "2026-08-19",
-        "test_normal": {
-            "all": {
-                "task_goal_completion": 61.9,
-                "scenario_goal_completion": 50.0,
-                "interactions": 21.11
-            },
-            "level 1": {
-                "task_goal_completion": 91.2,
-                "scenario_goal_completion": 79.0,
-                "interactions": 21.11
-            },
-            "level 2": {
-                "task_goal_completion": 52.1,
-                "scenario_goal_completion": 43.8,
-                "interactions": 21.11
-            },
-            "level 3": {
-                "task_goal_completion": 42.9,
-                "scenario_goal_completion": 28.6,
-                "interactions": 21.11
-        "id": "1095b768-6513e0c6",
-        "method": {
-            "name": "kecaipan capybara",
-            "tooltip": "Self-organizing context assets learned on train and frozen for closed-book evaluation"
-        },
-        "llm": {
-            "name": "gpt-5.6-luna",
-            "tooltip": "LongjiTech OpenAI-compatible Responses API; model ID gpt-5.6-luna"
-        },
-        "url": "https://github.com/pkc000pkc/capybara",
-        "date": "2026-08-08",
-        "test_normal": {
-            "all": {
-                "task_goal_completion": 85.1,
-                "scenario_goal_completion": 73.2,
-                "interactions": 9.34
-            },
-            "level 1": {
-                "task_goal_completion": 94.7,
-                "scenario_goal_completion": 84.2,
-                "interactions": 9.34
-            },
-            "level 2": {
-                "task_goal_completion": 93.8,
-                "scenario_goal_completion": 81.2,
-                "interactions": 9.34
-            },
-            "level 3": {
-                "task_goal_completion": 69.8,
-                "scenario_goal_completion": 57.1,
-                "interactions": 9.34
-        "id": "8704e2bf-b2db4444",
-        "method": {
-            "name": "IBM-HCL-GP",
-            "tooltip": "Hierarchical Component Learning for Generalized Policies"
-        },
-        "llm": {
-            "name": "Claude Sonnet 4.6",
-            "tooltip": ""
-        },
-        "url": "https://arxiv.org/abs/2605.06957v1",
-        "date": "2026-05-21",
-        "test_normal": {
-            "all": {
-                "task_goal_completion": 96.4,
-                "scenario_goal_completion": 96.4,
-                "interactions": 1.0
-            },
-            "level 1": {
-                "task_goal_completion": 100.0,
-                "scenario_goal_completion": 100.0,
-                "interactions": 1.0
-        "id": "f072cd07-6ae0fbdf",
-        "method": {
-            "name": "Button Agent",
-            "tooltip": "Button Agent"
-        },
-        "llm": {
-            "name": "Claude Opus 4.6",
-            "tooltip": "claude-opus-4-6"
-        },
-        "url": "https://distyl.ai/",
-        "date": "2026-03-23",
-        "test_normal": {
-            "all": {
-                "task_goal_completion": 91.1,
-                "scenario_goal_completion": 89.3,
-                "interactions": 15.89
-            },
-            "level 1": {
-                "task_goal_completion": 82.5,
-                "scenario_goal_completion": 79.0,
-                "interactions": 15.89
-            },
-            "level 2": {
-                "task_goal_completion": 100.0,
-                "scenario_goal_completion": 100.0,
-                "interactions": 1.0
-            },
-            "level 3": {
-                "task_goal_completion": 90.5,
-                "scenario_goal_completion": 90.5,
-                "interactions": 1.0
-                "interactions": 15.89
-            },
-            "level 3": {
-                "task_goal_completion": 92.1,
-                "scenario_goal_completion": 90.5,
-                "interactions": 15.89
         "id": "5acab4bb-badb978f",
         "method": {
             "name": "RooAGI_agentbuilder_memtune_rl",
@@ -1181,78 +1061,6 @@
         },
         "test_challenge": {
             "all": {
-                "task_goal_completion": 37.6,
-                "scenario_goal_completion": 20.1,
-                "interactions": 24.75
-            },
-            "level 1": {
-                "task_goal_completion": 72.2,
-                "scenario_goal_completion": 45.8,
-                "interactions": 24.75
-            },
-            "level 2": {
-                "task_goal_completion": 36.0,
-                "scenario_goal_completion": 18.0,
-                "interactions": 24.75
-            },
-            "level 3": {
-                "task_goal_completion": 26.2,
-                "scenario_goal_completion": 12.3,
-                "interactions": 24.75
-                "task_goal_completion": 73.4,
-                "scenario_goal_completion": 52.5,
-                "interactions": 11.17
-            },
-            "level 1": {
-                "task_goal_completion": 83.3,
-                "scenario_goal_completion": 58.3,
-                "interactions": 11.17
-            },
-            "level 2": {
-                "task_goal_completion": 68.7,
-                "scenario_goal_completion": 48.0,
-                "interactions": 11.17
-            },
-            "level 3": {
-                "task_goal_completion": 73.3,
-                "scenario_goal_completion": 53.8,
-                "interactions": 11.17
-                "task_goal_completion": 98.3,
-                "scenario_goal_completion": 97.8,
-                "interactions": 1.0
-            },
-            "level 1": {
-                "task_goal_completion": 100.0,
-                "scenario_goal_completion": 100.0,
-                "interactions": 1.0
-            },
-            "level 2": {
-                "task_goal_completion": 98.0,
-                "scenario_goal_completion": 98.0,
-                "interactions": 1.0
-            },
-            "level 3": {
-                "task_goal_completion": 98.0,
-                "scenario_goal_completion": 96.9,
-                "interactions": 1.0
-                "task_goal_completion": 72.4,
-                "scenario_goal_completion": 64.8,
-                "interactions": 20.52
-            },
-            "level 1": {
-                "task_goal_completion": 76.4,
-                "scenario_goal_completion": 70.8,
-                "interactions": 20.52
-            },
-            "level 2": {
-                "task_goal_completion": 70.0,
-                "scenario_goal_completion": 62.0,
-                "interactions": 20.52
-            },
-            "level 3": {
-                "task_goal_completion": 72.8,
-                "scenario_goal_completion": 64.6,
-                "interactions": 20.52
                 "task_goal_completion": 15.3,
                 "scenario_goal_completion": 7.9,
                 "interactions": 17.03
@@ -1271,6 +1079,234 @@
                 "task_goal_completion": 3.6,
                 "scenario_goal_completion": 1.5,
                 "interactions": 17.03
+            }
+        }
+    },
+    {
+        "id": "f072cd07-6ae0fbdf",
+        "method": {
+            "name": "Button Agent",
+            "tooltip": "Button Agent"
+        },
+        "llm": {
+            "name": "Claude Opus 4.6",
+            "tooltip": "claude-opus-4-6"
+        },
+        "url": "https://distyl.ai/",
+        "date": "2026-03-23",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 91.1,
+                "scenario_goal_completion": 89.3,
+                "interactions": 15.89
+            },
+            "level 1": {
+                "task_goal_completion": 82.5,
+                "scenario_goal_completion": 79.0,
+                "interactions": 15.89
+            },
+            "level 2": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 15.89
+            },
+            "level 3": {
+                "task_goal_completion": 92.1,
+                "scenario_goal_completion": 90.5,
+                "interactions": 15.89
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 72.4,
+                "scenario_goal_completion": 64.8,
+                "interactions": 20.52
+            },
+            "level 1": {
+                "task_goal_completion": 76.4,
+                "scenario_goal_completion": 70.8,
+                "interactions": 20.52
+            },
+            "level 2": {
+                "task_goal_completion": 70.0,
+                "scenario_goal_completion": 62.0,
+                "interactions": 20.52
+            },
+            "level 3": {
+                "task_goal_completion": 72.8,
+                "scenario_goal_completion": 64.6,
+                "interactions": 20.52
+            }
+        }
+    },
+    {
+        "id": "8704e2bf-b2db4444",
+        "method": {
+            "name": "IBM-HCL-GP",
+            "tooltip": "Hierarchical Component Learning for Generalized Policies"
+        },
+        "llm": {
+            "name": "Claude Sonnet 4.6",
+            "tooltip": ""
+        },
+        "url": "https://arxiv.org/abs/2605.06957v1",
+        "date": "2026-05-21",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 96.4,
+                "scenario_goal_completion": 96.4,
+                "interactions": 1.0
+            },
+            "level 1": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 1.0
+            },
+            "level 2": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 1.0
+            },
+            "level 3": {
+                "task_goal_completion": 90.5,
+                "scenario_goal_completion": 90.5,
+                "interactions": 1.0
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 98.3,
+                "scenario_goal_completion": 97.8,
+                "interactions": 1.0
+            },
+            "level 1": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 1.0
+            },
+            "level 2": {
+                "task_goal_completion": 98.0,
+                "scenario_goal_completion": 98.0,
+                "interactions": 1.0
+            },
+            "level 3": {
+                "task_goal_completion": 98.0,
+                "scenario_goal_completion": 96.9,
+                "interactions": 1.0
+            }
+        }
+    },
+    {
+        "id": "1095b768-6513e0c6",
+        "method": {
+            "name": "kecaipan capybara",
+            "tooltip": "Self-organizing context assets learned on train and frozen for closed-book evaluation"
+        },
+        "llm": {
+            "name": "gpt-5.6-luna",
+            "tooltip": "LongjiTech OpenAI-compatible Responses API; model ID gpt-5.6-luna"
+        },
+        "url": "https://github.com/pkc000pkc/capybara",
+        "date": "2026-08-08",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 85.1,
+                "scenario_goal_completion": 73.2,
+                "interactions": 9.34
+            },
+            "level 1": {
+                "task_goal_completion": 94.7,
+                "scenario_goal_completion": 84.2,
+                "interactions": 9.34
+            },
+            "level 2": {
+                "task_goal_completion": 93.8,
+                "scenario_goal_completion": 81.2,
+                "interactions": 9.34
+            },
+            "level 3": {
+                "task_goal_completion": 69.8,
+                "scenario_goal_completion": 57.1,
+                "interactions": 9.34
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 73.4,
+                "scenario_goal_completion": 52.5,
+                "interactions": 11.17
+            },
+            "level 1": {
+                "task_goal_completion": 83.3,
+                "scenario_goal_completion": 58.3,
+                "interactions": 11.17
+            },
+            "level 2": {
+                "task_goal_completion": 68.7,
+                "scenario_goal_completion": 48.0,
+                "interactions": 11.17
+            },
+            "level 3": {
+                "task_goal_completion": 73.3,
+                "scenario_goal_completion": 53.8,
+                "interactions": 11.17
+            }
+        }
+    },
+    {
+        "id": "695a4b55-1b68dde4",
+        "method": {
+            "name": "LARA MAS",
+            "tooltip": "Explorer writes an app-tagged plan; per-app specialist executors run a ReAct loop; single attempt per task"
+        },
+        "llm": {
+            "name": "gpt-4.1-mini",
+            "tooltip": "gpt-4.1-mini for all agents (explorer, executor, supervisor)"
+        },
+        "url": "https://github.com/Omer212111/LARA",
+        "date": "2026-08-19",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 61.9,
+                "scenario_goal_completion": 50.0,
+                "interactions": 21.11
+            },
+            "level 1": {
+                "task_goal_completion": 91.2,
+                "scenario_goal_completion": 79.0,
+                "interactions": 21.11
+            },
+            "level 2": {
+                "task_goal_completion": 52.1,
+                "scenario_goal_completion": 43.8,
+                "interactions": 21.11
+            },
+            "level 3": {
+                "task_goal_completion": 42.9,
+                "scenario_goal_completion": 28.6,
+                "interactions": 21.11
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 37.6,
+                "scenario_goal_completion": 20.1,
+                "interactions": 24.75
+            },
+            "level 1": {
+                "task_goal_completion": 72.2,
+                "scenario_goal_completion": 45.8,
+                "interactions": 24.75
+            },
+            "level 2": {
+                "task_goal_completion": 36.0,
+                "scenario_goal_completion": 18.0,
+                "interactions": 24.75
+            },
+            "level 3": {
+                "task_goal_completion": 26.2,
+                "scenario_goal_completion": 12.3,
+                "interactions": 24.75
             }
         }
     }
