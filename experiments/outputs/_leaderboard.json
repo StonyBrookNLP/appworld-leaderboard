@@ -1366,5 +1366,62 @@
                 "interactions": 22.15
             }
         }
+    },
+    {
+        "id": "4c810aa3-1937be7c",
+        "method": {
+            "name": "IBM offline HCL-GP",
+            "tooltip": "Hierarchical Component Learning for Generalized Policies"
+        },
+        "llm": {
+            "name": "Claude Sonnet 4.6",
+            "tooltip": ""
+        },
+        "url": "https://arxiv.org/abs/2605.06957",
+        "date": "2026-09-04",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 96.4,
+                "scenario_goal_completion": 96.4,
+                "interactions": 1.0
+            },
+            "level 1": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 1.0
+            },
+            "level 2": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 1.0
+            },
+            "level 3": {
+                "task_goal_completion": 90.5,
+                "scenario_goal_completion": 90.5,
+                "interactions": 1.0
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 97.8,
+                "scenario_goal_completion": 97.8,
+                "interactions": 1.0
+            },
+            "level 1": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 1.0
+            },
+            "level 2": {
+                "task_goal_completion": 98.0,
+                "scenario_goal_completion": 98.0,
+                "interactions": 1.0
+            },
+            "level 3": {
+                "task_goal_completion": 96.9,
+                "scenario_goal_completion": 96.9,
+                "interactions": 1.0
+            }
+        }
     }
 ]
