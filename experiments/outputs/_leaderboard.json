@@ -1366,5 +1366,62 @@
                 "interactions": 22.15
             }
         }
+    },
+    {
+        "id": "e46d594e-0fe98eb8",
+        "method": {
+            "name": "GLM-5.3-Flash + Qwen3.8-Flash",
+            "tooltip": "Cost-efficient multi-role agent; estimated median LLM cost: about US$0.02/task (Normal), US$0.03/task (Challenge)"
+        },
+        "llm": {
+            "name": "GLM-5.3-Flash + Qwen3.8-Flash",
+            "tooltip": "Flash-tier models only; no Max/Pro. Reasoning is medium only for Scope Resolver; other roles are low or off"
+        },
+        "url": "https://github.com/Huanz86251/personalops-agent",
+        "date": "2026-09-18",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 83.3,
+                "scenario_goal_completion": 73.2,
+                "interactions": 9.7
+            },
+            "level 1": {
+                "task_goal_completion": 98.2,
+                "scenario_goal_completion": 94.7,
+                "interactions": 9.7
+            },
+            "level 2": {
+                "task_goal_completion": 91.7,
+                "scenario_goal_completion": 75.0,
+                "interactions": 9.7
+            },
+            "level 3": {
+                "task_goal_completion": 63.5,
+                "scenario_goal_completion": 52.4,
+                "interactions": 9.7
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 75.5,
+                "scenario_goal_completion": 51.8,
+                "interactions": 12.16
+            },
+            "level 1": {
+                "task_goal_completion": 87.5,
+                "scenario_goal_completion": 66.7,
+                "interactions": 12.16
+            },
+            "level 2": {
+                "task_goal_completion": 70.0,
+                "scenario_goal_completion": 50.0,
+                "interactions": 12.16
+            },
+            "level 3": {
+                "task_goal_completion": 75.4,
+                "scenario_goal_completion": 47.7,
+                "interactions": 12.16
+            }
+        }
     }
 ]
