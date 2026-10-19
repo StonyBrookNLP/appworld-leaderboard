@@ -1366,5 +1366,62 @@
                 "interactions": 22.15
             }
         }
+    },
+    {
+        "id": "67198123-c88248d7",
+        "method": {
+            "name": "PELG Harness",
+            "tooltip": "Training-trace PELG guidance with task-scoped statistics, cross-task API suggestions, execution checks, checkpoint recovery, and failure constraints."
+        },
+        "llm": {
+            "name": "Qwen3.6-27B",
+            "tooltip": "FP8; vLLM; single NVIDIA A100 80GB PCIe"
+        },
+        "url": "https://github.com/shironine-y/PELG-harness",
+        "date": "2026-10-19",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 76.8,
+                "scenario_goal_completion": 60.7,
+                "interactions": 15.34
+            },
+            "level 1": {
+                "task_goal_completion": 80.7,
+                "scenario_goal_completion": 63.2,
+                "interactions": 15.34
+            },
+            "level 2": {
+                "task_goal_completion": 83.3,
+                "scenario_goal_completion": 68.8,
+                "interactions": 15.34
+            },
+            "level 3": {
+                "task_goal_completion": 68.2,
+                "scenario_goal_completion": 52.4,
+                "interactions": 15.34
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 72.7,
+                "scenario_goal_completion": 53.2,
+                "interactions": 17.75
+            },
+            "level 1": {
+                "task_goal_completion": 84.7,
+                "scenario_goal_completion": 70.8,
+                "interactions": 17.75
+            },
+            "level 2": {
+                "task_goal_completion": 72.0,
+                "scenario_goal_completion": 54.0,
+                "interactions": 17.75
+            },
+            "level 3": {
+                "task_goal_completion": 68.7,
+                "scenario_goal_completion": 46.2,
+                "interactions": 17.75
+            }
+        }
     }
 ]
