@@ -1423,5 +1423,62 @@
                 "interactions": 47.34
             }
         }
+    },
+    {
+        "id": "3bd98253-d4fa6c8e",
+        "method": {
+            "name": "SynthAPI",
+            "tooltip": "Created 458,000 RL environments and trained on them."
+        },
+        "llm": {
+            "name": "Qwen3.5-27B",
+            "tooltip": "Qwen3.5-27B finetuned on 458,000 RL environments"
+        },
+        "url": "https://arxiv.org/abs/2610.37648",
+        "date": "2026-10-28",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 88.7,
+                "scenario_goal_completion": 83.9,
+                "interactions": 18.98
+            },
+            "level 1": {
+                "task_goal_completion": 91.2,
+                "scenario_goal_completion": 89.5,
+                "interactions": 18.98
+            },
+            "level 2": {
+                "task_goal_completion": 97.9,
+                "scenario_goal_completion": 93.8,
+                "interactions": 18.98
+            },
+            "level 3": {
+                "task_goal_completion": 79.4,
+                "scenario_goal_completion": 71.4,
+                "interactions": 18.98
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 83.7,
+                "scenario_goal_completion": 71.2,
+                "interactions": 22.82
+            },
+            "level 1": {
+                "task_goal_completion": 95.8,
+                "scenario_goal_completion": 91.7,
+                "interactions": 22.82
+            },
+            "level 2": {
+                "task_goal_completion": 76.0,
+                "scenario_goal_completion": 60.0,
+                "interactions": 22.82
+            },
+            "level 3": {
+                "task_goal_completion": 85.1,
+                "scenario_goal_completion": 72.3,
+                "interactions": 22.82
+            }
+        }
     }
 ]
