@@ -1140,63 +1140,6 @@
         }
     },
     {
-        "id": "8704e2bf-b2db4444",
-        "method": {
-            "name": "IBM-HCL-GP",
-            "tooltip": "Hierarchical Component Learning for Generalized Policies"
-        },
-        "llm": {
-            "name": "Claude Sonnet 4.6",
-            "tooltip": ""
-        },
-        "url": "https://arxiv.org/abs/2605.06957v1",
-        "date": "2026-05-21",
-        "test_normal": {
-            "all": {
-                "task_goal_completion": 96.4,
-                "scenario_goal_completion": 96.4,
-                "interactions": 1.0
-            },
-            "level 1": {
-                "task_goal_completion": 100.0,
-                "scenario_goal_completion": 100.0,
-                "interactions": 1.0
-            },
-            "level 2": {
-                "task_goal_completion": 100.0,
-                "scenario_goal_completion": 100.0,
-                "interactions": 1.0
-            },
-            "level 3": {
-                "task_goal_completion": 90.5,
-                "scenario_goal_completion": 90.5,
-                "interactions": 1.0
-            }
-        },
-        "test_challenge": {
-            "all": {
-                "task_goal_completion": 98.3,
-                "scenario_goal_completion": 97.8,
-                "interactions": 1.0
-            },
-            "level 1": {
-                "task_goal_completion": 100.0,
-                "scenario_goal_completion": 100.0,
-                "interactions": 1.0
-            },
-            "level 2": {
-                "task_goal_completion": 98.0,
-                "scenario_goal_completion": 98.0,
-                "interactions": 1.0
-            },
-            "level 3": {
-                "task_goal_completion": 98.0,
-                "scenario_goal_completion": 96.9,
-                "interactions": 1.0
-            }
-        }
-    },
-    {
         "id": "1095b768-6513e0c6",
         "method": {
             "name": "kecaipan capybara",
@@ -1364,6 +1307,63 @@
                 "task_goal_completion": 84.1,
                 "scenario_goal_completion": 75.4,
                 "interactions": 22.15
+            }
+        }
+    },
+    {
+        "id": "a2db3f1e-2c28b1b2",
+        "method": {
+            "name": "IBM CUGA",
+            "tooltip": "configurable generalist agent for enterprise automation"
+        },
+        "llm": {
+            "name": "GLM-5.3-Flash",
+            "tooltip": "z-ai/glm-5.3-flash via OpenRouter, temperature 0.1"
+        },
+        "url": "https://github.com/cuga-project/cuga-agent",
+        "date": "2026-09-07",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 93.5,
+                "scenario_goal_completion": 91.1,
+                "interactions": 21.65
+            },
+            "level 1": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 21.65
+            },
+            "level 2": {
+                "task_goal_completion": 97.9,
+                "scenario_goal_completion": 93.8,
+                "interactions": 21.65
+            },
+            "level 3": {
+                "task_goal_completion": 84.1,
+                "scenario_goal_completion": 81.0,
+                "interactions": 21.65
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 92.8,
+                "scenario_goal_completion": 84.2,
+                "interactions": 43.08
+            },
+            "level 1": {
+                "task_goal_completion": 93.1,
+                "scenario_goal_completion": 83.3,
+                "interactions": 43.08
+            },
+            "level 2": {
+                "task_goal_completion": 90.7,
+                "scenario_goal_completion": 80.0,
+                "interactions": 43.08
+            },
+            "level 3": {
+                "task_goal_completion": 94.4,
+                "scenario_goal_completion": 87.7,
+                "interactions": 43.08
             }
         }
     },

@@ -14,6 +14,9 @@ For both cases, you first need to
 
 ## Submit Your Agent's Outputs
 
+> [!IMPORTANT]
+> Please read the [leaderboard submission policy](https://appworld.dev/appworld/leaderboard) before submitting.
+
 **First**, pack your agent's `test_normal` and `test_challenge` experiment outputs:
 
 <details>
@@ -63,7 +66,9 @@ The pack command compresses and encrypts the experiment outputs in `leaderboard.
 ./experiments/outputs/{test_challenge_experiment_name}/leaderboard.bundle
 ```
 
-Then create a PR with these two files and post a comment as follows. Here, `EXPERIMENT_NAME_PREFIX` refers to the experiment name without the suffix of `_test_normal` and `_test_challenge` for the two splits.
+Then create a PR with these two files and fill out the provided template: mention your agent and model, include any associated paper or website, and check all four policy agreement boxes.
+
+Next, post the following command as a separate PR comment. Here, `EXPERIMENT_NAME_PREFIX` refers to the experiment name without the suffix of `_test_normal` and `_test_challenge` for the two splits.
 
 ```bash
 # Change python and appworld version as desired. NOTE: Make sure there is not white space in the comment before the command starts.
