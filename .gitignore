@@ -9,6 +9,7 @@
 !scripts/*
 !.gitignore
 !.github/
+!.github/pull_request_template.md
 !.github/workflows/
 !.github/workflows/*
 
