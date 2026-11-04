@@ -1366,5 +1366,62 @@
                 "interactions": 43.08
             }
         }
+    },
+    {
+        "id": "65df675b-ca5e4771",
+        "method": {
+            "name": "AtlasHarness",
+            "tooltip": "Tool-calling agent harness with governed MCP tool bridge, task-ledger checklists, write-path confirmation gates, and scripted batch tool calls; single attempt per task"
+        },
+        "llm": {
+            "name": "GLM-5.3",
+            "tooltip": "Zhipu GLM-5.3 via OpenAI-compatible gateway"
+        },
+        "url": "https://haizhi.com/about",
+        "date": "2026-10-21",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 94.0,
+                "scenario_goal_completion": 87.5,
+                "interactions": 39.76
+            },
+            "level 1": {
+                "task_goal_completion": 98.2,
+                "scenario_goal_completion": 94.7,
+                "interactions": 39.76
+            },
+            "level 2": {
+                "task_goal_completion": 97.9,
+                "scenario_goal_completion": 93.8,
+                "interactions": 39.76
+            },
+            "level 3": {
+                "task_goal_completion": 87.3,
+                "scenario_goal_completion": 76.2,
+                "interactions": 39.76
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 89.5,
+                "scenario_goal_completion": 78.4,
+                "interactions": 47.34
+            },
+            "level 1": {
+                "task_goal_completion": 93.1,
+                "scenario_goal_completion": 83.3,
+                "interactions": 47.34
+            },
+            "level 2": {
+                "task_goal_completion": 86.7,
+                "scenario_goal_completion": 74.0,
+                "interactions": 47.34
+            },
+            "level 3": {
+                "task_goal_completion": 90.3,
+                "scenario_goal_completion": 80.0,
+                "interactions": 47.34
+            }
+        }
     }
 ]
