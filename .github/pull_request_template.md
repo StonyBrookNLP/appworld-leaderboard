@@ -8,7 +8,7 @@ Briefly describe your submission. If it has an associated paper or website, ment
 
 ## Submission policy agreement
 
-<!-- For leaderboard submissions, check every box below. -->
+<!-- Please check every box below. -->
 
 - [ ] I have read the [leaderboard submission policy](https://appworld.dev/appworld/leaderboard) and confirm that this submission complies.
 - [ ] The submission reports pass@1, with one attempt per task.
