@@ -1,9 +1,9 @@
 ## Submission
 
 <!--
-Please mention your agent and model used for the submission.
-If there is a paper or website associated with your submission, mention it as well.
-Add any other detail you want to include for the submission.
+Please prefer to title your PR as "Add <Agent/Method name> (<Base LM name>) entry", e.g., "Add React Agent (GPT-4) entry".
+
+Briefly describe your submission. If it has an associated paper or website, mention it here as well.
 -->
 
 ## Submission policy agreement
