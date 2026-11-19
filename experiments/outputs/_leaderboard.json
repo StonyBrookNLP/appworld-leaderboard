@@ -1480,5 +1480,62 @@
                 "interactions": 22.82
             }
         }
+    },
+    {
+        "id": "1dc47acd-8f57408f",
+        "method": {
+            "name": "DeepSeek with pre-completion verification",
+            "tooltip": "Independent single-attempt JavaScript agent with read-only checks before submission."
+        },
+        "llm": {
+            "name": "deepseek-v4.1-flash-1017",
+            "tooltip": "Single model for task execution, verification and final answer formatting."
+        },
+        "url": "",
+        "date": "2026-11-19",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 79.8,
+                "scenario_goal_completion": 62.5,
+                "interactions": 20.95
+            },
+            "level 1": {
+                "task_goal_completion": 89.5,
+                "scenario_goal_completion": 79.0,
+                "interactions": 20.95
+            },
+            "level 2": {
+                "task_goal_completion": 79.2,
+                "scenario_goal_completion": 62.5,
+                "interactions": 20.95
+            },
+            "level 3": {
+                "task_goal_completion": 71.4,
+                "scenario_goal_completion": 47.6,
+                "interactions": 20.95
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 80.6,
+                "scenario_goal_completion": 64.8,
+                "interactions": 24.22
+            },
+            "level 1": {
+                "task_goal_completion": 94.4,
+                "scenario_goal_completion": 87.5,
+                "interactions": 24.22
+            },
+            "level 2": {
+                "task_goal_completion": 80.7,
+                "scenario_goal_completion": 66.0,
+                "interactions": 24.22
+            },
+            "level 3": {
+                "task_goal_completion": 75.4,
+                "scenario_goal_completion": 55.4,
+                "interactions": 24.22
+            }
+        }
     }
 ]
