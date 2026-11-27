@@ -1480,5 +1480,62 @@
                 "interactions": 22.82
             }
         }
+    },
+    {
+        "id": "942a91bc-7d80b7c4",
+        "method": {
+            "name": "Submilli",
+            "tooltip": "Code agent writing TypeScript programs over typed Packages of the AppWorld APIs, run by Submilli, with a read-only result checker subagent; single attempt per task"
+        },
+        "llm": {
+            "name": "GLM-5.3-Flash",
+            "tooltip": "z-ai/glm-5.3-flash via OpenRouter (Z.AI endpoint), temperature 0.1"
+        },
+        "url": "https://github.com/submilli/submilli-runtime",
+        "date": "2026-11-27",
+        "test_normal": {
+            "all": {
+                "task_goal_completion": 96.4,
+                "scenario_goal_completion": 96.4,
+                "interactions": 9.18
+            },
+            "level 1": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 9.18
+            },
+            "level 2": {
+                "task_goal_completion": 100.0,
+                "scenario_goal_completion": 100.0,
+                "interactions": 9.18
+            },
+            "level 3": {
+                "task_goal_completion": 90.5,
+                "scenario_goal_completion": 90.5,
+                "interactions": 9.18
+            }
+        },
+        "test_challenge": {
+            "all": {
+                "task_goal_completion": 92.8,
+                "scenario_goal_completion": 86.3,
+                "interactions": 12.12
+            },
+            "level 1": {
+                "task_goal_completion": 91.7,
+                "scenario_goal_completion": 79.2,
+                "interactions": 12.12
+            },
+            "level 2": {
+                "task_goal_completion": 88.7,
+                "scenario_goal_completion": 80.0,
+                "interactions": 12.12
+            },
+            "level 3": {
+                "task_goal_completion": 96.4,
+                "scenario_goal_completion": 93.8,
+                "interactions": 12.12
+            }
+        }
     }
 ]
